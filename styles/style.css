@@ -1,0 +1,19 @@
+.pane-sm.sidebar {
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+}
+.pane-sm.sidebar:hover {
+  max-width: 50%;
+  width: 50%;
+}
+
+.list-group-item {
+  position: relative;
+}
+.list-group-item .js--close {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+}

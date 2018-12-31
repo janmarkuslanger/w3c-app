@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>W3C Validator APP</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/photon.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- Javascript -->
+    <script src="js/element.js" charset="utf-8"></script>
+    <script src="js/state.js" charset="utf-8"></script>
+    <script src="js/page.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+
+    <div class="window">
+      <header class="toolbar toolbar-header">
+        <h1 class="title">Welcome!</h1>
+
+        <div class="toolbar-actions base">
+          <div class="btn-group">
+            <button class="btn btn-default">
+              <span class="icon icon-home"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-help"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-window"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-newspaper"></span>
+            </button>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-default">
+              <span class="icon icon-github"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-share"></span>
+            </button>
+            <button class="btn btn-default">
+              <span class="icon icon-mail"></span>
+            </button>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-mini btn-positive js--online">Online</button>
+          </div>
+        </div>
+
+      </header>
+
+      <div class="window-content">
+        <div class="pane-group">
+
+          <div class="pane-sm sidebar">
+            <ul class="list-group">
+              <li class="list-group-header">
+                <input class="form-control" type="text" placeholder="Search for someone">
+              </li>
+
+            </ul>
+          </div>
+
+          <div class="pane">
+            <div class="js--result"></div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="toolbar toolbar-footer">
+        <h1 class="title">Footer</h1>
+      </footer>
+    </div>
+
+    <script src="js/online.js"></script>
+    <script src="js/add-url.js"></script>
+
+  </body>
+</html>

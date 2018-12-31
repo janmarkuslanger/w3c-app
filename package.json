@@ -1,0 +1,20 @@
+{
+  "name": "w3c-app",
+  "version": "0.1.0",
+  "description": "A W3C Application.",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "w3c",
+    "app",
+    "w3c-api"
+  ],
+  "author": "Jan-Markus Langer",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "4.0.0",
+    "node-sass": "^4.11.0"
+  }
+}
