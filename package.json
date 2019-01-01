@@ -4,7 +4,9 @@
   "description": "A W3C Application.",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "keywords": [
     "w3c",
@@ -16,6 +18,8 @@
   "devDependencies": {
     "electron": "4.0.0",
     "node-sass": "^4.11.0",
-    "smalltalk": "^3.2.2"
+    "smalltalk": "^3.2.2",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2"
   }
 }

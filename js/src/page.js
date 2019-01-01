@@ -1,4 +1,4 @@
-function Page(url) {
+export function Page(url) {
   this.url = url;
 };
 
