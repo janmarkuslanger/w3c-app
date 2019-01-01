@@ -21,8 +21,59 @@ dialog {
 .list-group-item {
   position: relative;
 }
+.list-group-item:hover {
+  background-color: rgb(235, 235, 234);
+}
 .list-group-item .js--close {
   position: absolute;
   top: 4px;
   left: 10px;
+}
+
+.js--dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.js--dialog .shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(33,33,33,.8);
+}
+.js--dialog .close {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  transform: translate(-150%, -150%);
+  background-color: rgb(245,245,245);
+  border-radius: 4px;
+  z-index: 1000;
+  cursor: pointer;
+}
+.js--dialog .close .icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.js--dialog .inner {
+  position: relative;
+  width: 500px;
+  background-color: rgb(245,245,245);
+  border-radius: 4px;
+}
+
+.js--result {
+  padding: 20px;
 }

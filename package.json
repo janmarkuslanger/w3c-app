@@ -16,6 +16,7 @@
   "author": "Jan-Markus Langer",
   "license": "MIT",
   "devDependencies": {
+    "axios": "^0.18.0",
     "electron": "4.0.0",
     "node-sass": "^4.11.0",
     "smalltalk": "^3.2.2",

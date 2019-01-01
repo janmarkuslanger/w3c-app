@@ -1,4 +1,4 @@
-import { h } from './dialog';
+import { h } from './h';
 
 export function Dialog(content, cssClass) {
   this.content = content;
@@ -27,11 +27,14 @@ Dialog.prototype.destroy = function () {
 };
 
 Dialog.prototype.render = function (root) {
-  if (typeof this.content === 'Array') {
+const that = this;
+
+  if (Array.isArray(this.content)) {
     this.content.forEach(function(item){
-      this.port.appendChild(item)
+      that.port.appendChild(item)
     });
   } else {
+    console.log(this.content);
     this.port.appendChild(this.content);
   }
 
