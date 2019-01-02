@@ -34,7 +34,7 @@ export class Page {
       container.appendChild(h('h1', {class: 'no-error'}, ['There are no errors. :)']))
     }
 
-
+    new Notification('W3C-Check ready.', `The W3C Check on page ${this.url} is ready.`);
   }
 
   renderResultItem (item) {
