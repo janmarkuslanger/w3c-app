@@ -4,4 +4,4 @@
 
 ---
 
-<p align="center"><img src="assets/demo-app.gif></p>
+<p align="center"><img width="600" src="assets/preview.png"></p>
