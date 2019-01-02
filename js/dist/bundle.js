@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./js/src/add-sitemap.js":
+/*!*******************************!*\
+  !*** ./js/src/add-sitemap.js ***!
+  \*******************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n/* harmony import */ var _sitemap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sitemap */ \"./js/src/sitemap.js\");\n/* harmony import */ var _page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./page */ \"./js/src/page.js\");\n/* harmony import */ var _dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dialog */ \"./js/src/dialog.js\");\n/* harmony import */ var _dom_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dom-constants */ \"./js/src/dom-constants.js\");\n\n\n\n\n\n\n\n(function(){\n  /**\n   * icon\n   * @type {HTML Element}\n   */\n  const icon = document.querySelector('header .js--action-sitemap');\n\n  icon.addEventListener('click', () => {\n    const inputField = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('input', {type: 'text', class: 'form-control', placeholder: 'Enter a Sitemap'});\n    const content = [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form padded-more'},[\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          inputField,\n        ]),\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-positive', click: async function(){\n            const value = inputField.value;\n\n            if (value === '') {\n              dialog.parentElement.removeChild(dialog);\n            }\n\n            const _sitemap = new _sitemap__WEBPACK_IMPORTED_MODULE_1__[\"Sitemap\"](value);\n            const urls = await _sitemap.extractUrls();\n\n            urls.forEach((url) => {\n              const page = new _page__WEBPACK_IMPORTED_MODULE_2__[\"Page\"](url);\n              const item = page.renderListItem();\n              _dom_constants__WEBPACK_IMPORTED_MODULE_4__[\"listGroup\"].appendChild(item);\n            });\n\n            urlDialog.destroy();\n          }}, ['Add URL']),\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-negative', click: function(){\n            urlDialog.destroy();\n          }}, ['Cancel'])\n        ])\n      ])\n    ];\n\n    const urlDialog = new _dialog__WEBPACK_IMPORTED_MODULE_3__[\"Dialog\"](content);\n    urlDialog.render(document.body);\n  });\n\n}());\n\n\n//# sourceURL=webpack:///./js/src/add-sitemap.js?");
+
+/***/ }),
+
 /***/ "./js/src/add-url.js":
 /*!***************************!*\
   !*** ./js/src/add-url.js ***!
@@ -94,7 +106,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n/* harmony import */ var _dialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dialog */ \"./js/src/dialog.js\");\n/* harmony import */ var _page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./page */ \"./js/src/page.js\");\n\n\n\n\n(function(){\n  /**\n   * icon\n   * @type {HTML Element}\n   */\n  const icon = document.querySelector('header .icon-window');\n\n  /**\n   * list group\n   * @type {HTML Element}\n   */\n  const listGroup = document.querySelector('.pane-sm.sidebar .list-group');\n\n  icon.addEventListener('click', () => {\n    const inputField = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('input', {type: 'text', class: 'form-control', placeholder: 'Enter a URL'});\n    const content = [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form padded-more'},[\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          inputField,\n        ]),\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-positive', click: function(){\n            const value = inputField.value;\n\n            if (value === '') {\n              dialog.parentElement.removeChild(dialog);\n            }\n\n            const page = new _page__WEBPACK_IMPORTED_MODULE_2__[\"Page\"](value);\n            const item = page.renderListItem();\n            listGroup.appendChild(item);\n\n            urlDialog.destroy();\n          }}, ['Add URL']),\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-negative'}, ['Cancel'])\n        ])\n      ])\n    ];\n\n    const urlDialog = new _dialog__WEBPACK_IMPORTED_MODULE_1__[\"Dialog\"](content);\n    urlDialog.render(document.body);\n  });\n\n}());\n\n\n//# sourceURL=webpack:///./js/src/add-url.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n/* harmony import */ var _dialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dialog */ \"./js/src/dialog.js\");\n/* harmony import */ var _page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./page */ \"./js/src/page.js\");\n/* harmony import */ var _dom_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dom-constants */ \"./js/src/dom-constants.js\");\n\n\n\n\n\n(function(){\n  /**\n   * icon\n   * @type {HTML Element}\n   */\n  const icon = document.querySelector('header .js--action-url');\n\n  icon.addEventListener('click', () => {\n    const inputField = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('input', {type: 'text', class: 'form-control', placeholder: 'Enter a URL'});\n    const content = [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form padded-more'},[\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          inputField,\n        ]),\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-positive', click: function(){\n            const value = inputField.value;\n\n            if (value === '') {\n              dialog.parentElement.removeChild(dialog);\n            }\n\n            const page = new _page__WEBPACK_IMPORTED_MODULE_2__[\"Page\"](value);\n            const item = page.renderListItem();\n            _dom_constants__WEBPACK_IMPORTED_MODULE_3__[\"listGroup\"].appendChild(item);\n\n            urlDialog.destroy();\n          }}, ['Add URL']),\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-negative', click: function(){\n            urlDialog.destroy();\n          }}, ['Cancel'])\n        ])\n      ])\n    ];\n\n    const urlDialog = new _dialog__WEBPACK_IMPORTED_MODULE_1__[\"Dialog\"](content);\n    urlDialog.render(document.body);\n  });\n\n}());\n\n\n//# sourceURL=webpack:///./js/src/add-url.js?");
 
 /***/ }),
 
@@ -106,7 +118,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _h__
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Dialog\", function() { return Dialog; });\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n\n\nfunction Dialog(content, cssClass) {\n  this.content = content;\n  this.cssClass = cssClass;\n  this.template = this.renderTemplate();\n};\n\nDialog.prototype.renderTemplate = function () {\n  const that = this;\n\n  this.port = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: `content ${this.cssClass}`});\n\n  return Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'js--dialog'}, [\n    Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'shadow'}),\n    Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'inner'}, [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'close', click: function(){\n        that.destroy();\n      }}, [Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('span', {class: 'icon icon-cancel'})]),\n      this.port\n    ])\n  ]);\n};\n\nDialog.prototype.destroy = function () {\n  this.template.parentElement.removeChild(this.template);\n};\n\nDialog.prototype.render = function (root) {\nconst that = this;\n\n  if (Array.isArray(this.content)) {\n    this.content.forEach(function(item){\n      that.port.appendChild(item)\n    });\n  } else {\n    console.log(this.content);\n    this.port.appendChild(this.content);\n  }\n\n  root.appendChild(this.template);\n};\n\n\n//# sourceURL=webpack:///./js/src/dialog.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Dialog\", function() { return Dialog; });\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n\n\nclass Dialog {\n\n  constructor(content, cssClass) {\n    this.content = content;\n    this.cssClass = cssClass;\n    this.template = this.renderTemplate();\n  }\n\n  renderTemplate() {\n    const that = this;\n\n    this.port = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: `content ${this.cssClass}`});\n\n    return Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'js--dialog'}, [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'shadow'}),\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'inner'}, [\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'close', click: function(){\n          that.destroy();\n        }}, [Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('span', {class: 'icon icon-cancel'})]),\n        this.port\n      ])\n    ]);\n  }\n\n  destroy() {\n    this.template.parentElement.removeChild(this.template);\n  }\n\n  render(root) {\n    const that = this;\n\n    if (Array.isArray(this.content)) {\n      this.content.forEach(function(item){\n        that.port.appendChild(item)\n      });\n    } else {\n      this.port.appendChild(this.content);\n    }\n\n    root.appendChild(this.template);\n  }\n\n};\n\n\n//# sourceURL=webpack:///./js/src/dialog.js?");
+
+/***/ }),
+
+/***/ "./js/src/dom-constants.js":
+/*!*********************************!*\
+  !*** ./js/src/dom-constants.js ***!
+  \*********************************/
+/*! exports provided: listGroup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"listGroup\", function() { return listGroup; });\n/**\n * list group\n * @type {HTML Element}\n */\nconst listGroup = document.querySelector('.pane-sm.sidebar .list-group');\n\n\n//# sourceURL=webpack:///./js/src/dom-constants.js?");
 
 /***/ }),
 
@@ -122,6 +146,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
+/***/ "./js/src/helper.js":
+/*!**************************!*\
+  !*** ./js/src/helper.js ***!
+  \**************************/
+/*! exports provided: clearChilds */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"clearChilds\", function() { return clearChilds; });\nconst clearChilds = (container) => {\n  while (container.firstChild) {\n    container.removeChild(container.firstChild);\n  }\n};\n\n\n//# sourceURL=webpack:///./js/src/helper.js?");
+
+/***/ }),
+
 /***/ "./js/src/index.js":
 /*!*************************!*\
   !*** ./js/src/index.js ***!
@@ -129,7 +165,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! ./online */ \"./js/src/online.js\");\n__webpack_require__(/*! ./add-url */ \"./js/src/add-url.js\");\n\n\n//# sourceURL=webpack:///./js/src/index.js?");
+eval("__webpack_require__(/*! ./online */ \"./js/src/online.js\");\n__webpack_require__(/*! ./add-url */ \"./js/src/add-url.js\");\n__webpack_require__(/*! ./add-sitemap */ \"./js/src/add-sitemap.js\");\n__webpack_require__(/*! ./search-list */ \"./js/src/search-list.js\");\n\n// require('./test');\n\n\n//# sourceURL=webpack:///./js/src/index.js?");
 
 /***/ }),
 
@@ -152,7 +188,30 @@ eval("(function(){\n  /**\n   * header html element\n   * @type {HTML element}\n
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Page\", function() { return Page; });\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nfunction Page(url) {\n  this.url = url;\n};\n\nconst container = document.querySelector('.js--result');\n\nconst clearContainer = () => {\n  while(container.firstChild) {\n    container.removeChild(container.firstChild);\n  }\n};\n\nPage.prototype.syncPageData = async function() {\n  this.data = await axios.get(`https://validator.nu/?doc=${this.url}&out=json`);\n\n  return this.data;\n};\n\nPage.prototype.renderData = async function() {\n  await this.syncPageData();\n  const that = this;\n  const messages = this.data.data.messages;\n\n  messages.forEach((message) => {\n    const item = that.renderResultItem(message);\n    container.appendChild(item);\n  });\n};\n\nPage.prototype.renderResultItem = function (item) {\n  return Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'result-item'},[\n    Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'title'}, [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('strong', null, [`${item.type}: `]),\n      item.message\n    ]),\n    Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'extract'}, [item.extract])\n  ]);\n};\n\nPage.prototype.renderListItem = function () {\n\n  const that = this;\n\n  const template = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('li', {class: 'list-group-item', click: function(){\n    clearContainer();\n    that.renderData();\n  }}, [\n    Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'action-bar'},[\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'js--close'}, [\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('span', {class: 'icon icon-cancel'})\n      ])\n    ]),\n    Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'padded'}, [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('strong', null, [this.url])\n    ])\n  ]);\n\n  return template;\n};\n\n\n//# sourceURL=webpack:///./js/src/page.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Page\", function() { return Page; });\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper */ \"./js/src/helper.js\");\n\n\n\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nconst container = document.querySelector('.js--result');\n\nclass Page {\n\n  constructor(url) {\n    this.url = url;\n  }\n\n  async syncPageData() {\n    this.data = await axios.get(`https://validator.nu/?doc=${this.url}&out=json`);\n\n    return this.data;\n  }\n\n  async renderData() {\n    await this.syncPageData();\n    const that = this;\n    const messages = this.data.data.messages;\n\n    if (messages.length > 0) {\n      messages.forEach((message) => {\n        const item = that.renderResultItem(message);\n        container.appendChild(item);\n      });\n    } else {\n      container.appendChild(Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('h1', {class: 'no-error'}, ['There are no errors. :)']))\n    }\n\n\n  }\n\n  renderResultItem (item) {\n    return Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'result-item'},[\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'info'}, [\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('strong', null, [`${item.type}: `]),\n        item.message\n      ]),\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'extract'}, [item.extract])\n    ]);\n  }\n\n  renderListItem () {\n    const that = this;\n\n    const template = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('li', {class: 'list-group-item', click: function(){\n      Object(_helper__WEBPACK_IMPORTED_MODULE_1__[\"clearChilds\"])(container);\n      that.renderData();\n    }}, [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'action-bar'},[\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'js--close'}, [\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('span', {class: 'icon icon-cancel'})\n        ])\n      ]),\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'padded'}, [\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('strong', null, [this.url])\n      ])\n    ]);\n\n    return template;\n  }\n\n}\n\n\n//# sourceURL=webpack:///./js/src/page.js?");
+
+/***/ }),
+
+/***/ "./js/src/search-list.js":
+/*!*******************************!*\
+  !*** ./js/src/search-list.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("(function(){\n\n  /**\n   * input element\n   * @type {HTML Element}\n   */\n  const input = document.querySelector('.pane-sm .form-control');\n\n  input.addEventListener('keyup', () => {\n\n    const value = input.value;\n\n    const items = [].slice.call(document.querySelectorAll('.list-group-item'));\n\n    if (value !== '') {\n      items.forEach((item) => {\n        const itemValue = item.querySelector('strong').textContent;\n        if (itemValue.includes(value)) {\n          item.style.display = 'block';\n        } else {\n          item.style.display = 'none';\n        }\n      });\n    } else {\n      items.forEach((item) => { item.style.display = 'block'; })\n    }\n\n  });\n\n}());\n\n\n//# sourceURL=webpack:///./js/src/search-list.js?");
+
+/***/ }),
+
+/***/ "./js/src/sitemap.js":
+/*!***************************!*\
+  !*** ./js/src/sitemap.js ***!
+  \***************************/
+/*! exports provided: Sitemap */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Sitemap\", function() { return Sitemap; });\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nclass Sitemap {\n  constructor(url) {\n    this.url = url;\n  }\n\n  async extractUrls() {\n    const response = await axios.get(this.url);\n\n    if (response.status !== 200) {\n      return false;\n    }\n\n    const data = response.data;\n\n    const urls = data.match(/<loc>(.*?)<\\/loc>/g).map(function(link){\n      return link.replace(/<\\/?loc>/g,'');\n    });\n\n    return urls;\n  }\n\n}\n\n\n//# sourceURL=webpack:///./js/src/sitemap.js?");
 
 /***/ }),
 

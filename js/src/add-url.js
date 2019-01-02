@@ -1,19 +1,14 @@
 import { h } from './h';
 import { Dialog } from './dialog';
 import { Page } from './page';
+import { listGroup } from './dom-constants';
 
 (function(){
   /**
    * icon
    * @type {HTML Element}
    */
-  const icon = document.querySelector('header .icon-window');
-
-  /**
-   * list group
-   * @type {HTML Element}
-   */
-  const listGroup = document.querySelector('.pane-sm.sidebar .list-group');
+  const icon = document.querySelector('header .js--action-url');
 
   icon.addEventListener('click', () => {
     const inputField = h('input', {type: 'text', class: 'form-control', placeholder: 'Enter a URL'});
@@ -36,7 +31,9 @@ import { Page } from './page';
 
             urlDialog.destroy();
           }}, ['Add URL']),
-          h('button', {class: 'btn btn-negative'}, ['Cancel'])
+          h('button', {class: 'btn btn-negative', click: function(){
+            urlDialog.destroy();
+          }}, ['Cancel'])
         ])
       ])
     ];

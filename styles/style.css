@@ -18,6 +18,11 @@ dialog {
   width: 50%;
 }
 
+.sidebar .list-group {
+  height: 100%;
+  overflow-y: scroll;
+}
+
 .list-group-item {
   position: relative;
 }
@@ -76,4 +81,32 @@ dialog {
 
 .js--result {
   padding: 20px;
+}
+.result-item {
+  text-align: left;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border: 1px solid rgba(33,33,33,.1);
+  border-radius: 4px;
+  padding: 10px;
+}
+.result-item .info {
+  color: #fd918d;
+  margin-bottom: 10px;
+}
+.result-item .info strong {
+  text-transform: uppercase;
+}
+.result-item .extract {
+  font-style: italic;
+  font-size: 12px;
+}
+.result-item * {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.no-error {
+  color: #5bd46d;
 }

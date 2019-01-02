@@ -1,12 +1,14 @@
 {
   "name": "w3c-app",
+  "productName": "A W3C Validator app.",
   "version": "0.1.0",
   "description": "A W3C Application.",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "build-mac": "sh scripts/build-mac.sh"
   },
   "keywords": [
     "w3c",
@@ -18,6 +20,7 @@
   "devDependencies": {
     "axios": "^0.18.0",
     "electron": "4.0.0",
+    "electron-packager": "^13.0.1",
     "node-sass": "^4.11.0",
     "smalltalk": "^3.2.2",
     "webpack": "^4.28.3",

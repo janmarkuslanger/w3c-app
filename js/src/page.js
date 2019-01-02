@@ -1,62 +1,67 @@
 import { h } from './h';
-const axios = require('axios');
+import { clearChilds } from './helper';
 
-export function Page(url) {
-  this.url = url;
-};
+const axios = require('axios');
 
 const container = document.querySelector('.js--result');
 
-const clearContainer = () => {
-  while(container.firstChild) {
-    container.removeChild(container.firstChild);
+export class Page {
+
+  constructor(url) {
+    this.url = url;
   }
-};
 
-Page.prototype.syncPageData = async function() {
-  this.data = await axios.get(`https://validator.nu/?doc=${this.url}&out=json`);
+  async syncPageData() {
+    this.data = await axios.get(`https://validator.nu/?doc=${this.url}&out=json`);
 
-  return this.data;
-};
+    return this.data;
+  }
 
-Page.prototype.renderData = async function() {
-  await this.syncPageData();
-  const that = this;
-  const messages = this.data.data.messages;
+  async renderData() {
+    await this.syncPageData();
+    const that = this;
+    const messages = this.data.data.messages;
 
-  messages.forEach((message) => {
-    const item = that.renderResultItem(message);
-    container.appendChild(item);
-  });
-};
+    if (messages.length > 0) {
+      messages.forEach((message) => {
+        const item = that.renderResultItem(message);
+        container.appendChild(item);
+      });
+    } else {
+      container.appendChild(h('h1', {class: 'no-error'}, ['There are no errors. :)']))
+    }
 
-Page.prototype.renderResultItem = function (item) {
-  return h('div', {class: 'result-item'},[
-    h('p', {class: 'title'}, [
-      h('strong', null, [`${item.type}: `]),
-      item.message
-    ]),
-    h('p', {class: 'extract'}, [item.extract])
-  ]);
-};
 
-Page.prototype.renderListItem = function () {
+  }
 
-  const that = this;
+  renderResultItem (item) {
+    return h('div', {class: 'result-item'},[
+      h('p', {class: 'info'}, [
+        h('strong', null, [`${item.type}: `]),
+        item.message
+      ]),
+      h('p', {class: 'extract'}, [item.extract])
+    ]);
+  }
 
-  const template = h('li', {class: 'list-group-item', click: function(){
-    clearContainer();
-    that.renderData();
-  }}, [
-    h('div', {class: 'action-bar'},[
-      h('div', {class: 'js--close'}, [
-        h('span', {class: 'icon icon-cancel'})
+  renderListItem () {
+    const that = this;
+
+    const template = h('li', {class: 'list-group-item', click: function(){
+      clearChilds(container);
+      that.renderData();
+    }}, [
+      h('div', {class: 'action-bar'},[
+        h('div', {class: 'js--close'}, [
+          h('span', {class: 'icon icon-cancel'})
+        ])
+      ]),
+      h('p', {class: 'padded'}, [
+        h('strong', null, [this.url])
       ])
-    ]),
-    h('p', {class: 'padded'}, [
-      h('strong', null, [this.url])
-    ])
-  ]);
+    ]);
 
-  return template;
-};
+    return template;
+  }
+
+}
