@@ -26,6 +26,9 @@ dialog {
 .list-group-item {
   position: relative;
 }
+.list-group-item .url:hover {
+  text-decoration: underline;
+}
 .list-group-item:hover {
   background-color: rgb(235, 235, 234);
 }
@@ -89,10 +92,19 @@ dialog {
   border: 1px solid rgba(33,33,33,.1);
   border-radius: 4px;
   padding: 10px;
+  transition: border-color .5s ease;
+}
+.result-item:hover {
+  border-color: rgba(33,33,33,.4);
 }
 .result-item .info {
-  color: #fd918d;
   margin-bottom: 10px;
+}
+.result-item.info .info {
+  color: #fece72;
+}
+.result-item.error .info {
+  color: #fd918d;
 }
 .result-item .info strong {
   text-transform: uppercase;

@@ -1,5 +1,6 @@
 import { h } from './h';
 import { clearChilds } from './helper';
+import { addPage,removePage,getActive as getActivePage,setActive as setActivePage } from './state';
 
 const axios = require('axios');
 
@@ -9,6 +10,7 @@ export class Page {
 
   constructor(url) {
     this.url = url;
+    addPage(this);
   }
 
   async syncPageData() {
@@ -18,6 +20,7 @@ export class Page {
   }
 
   async renderData() {
+    setActivePage(this);
     await this.syncPageData();
     const that = this;
     const messages = this.data.data.messages;
@@ -35,7 +38,8 @@ export class Page {
   }
 
   renderResultItem (item) {
-    return h('div', {class: 'result-item'},[
+
+    return h('div', {class: `result-item ${item.type}`},[
       h('p', {class: 'info'}, [
         h('strong', null, [`${item.type}: `]),
         item.message
@@ -47,17 +51,25 @@ export class Page {
   renderListItem () {
     const that = this;
 
-    const template = h('li', {class: 'list-group-item', click: function(){
-      clearChilds(container);
-      that.renderData();
-    }}, [
+    const template = h('li', {class: 'list-group-item'}, [
       h('div', {class: 'action-bar'},[
-        h('div', {class: 'js--close'}, [
+        h('div', {class: 'js--close', click: () => {
+          template.parentElement.removeChild(template);
+          removePage(that)
+
+          if (that === getActivePage()) {
+            clearChilds(container);
+          }
+
+        }}, [
           h('span', {class: 'icon icon-cancel'})
         ])
       ]),
       h('p', {class: 'padded'}, [
-        h('strong', null, [this.url])
+        h('strong', {class: 'url', click: function(){
+          clearChilds(container);
+          that.renderData();
+        }}, [this.url])
       ])
     ]);
 

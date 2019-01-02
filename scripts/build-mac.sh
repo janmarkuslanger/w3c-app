@@ -1,3 +1,10 @@
-eval 'electron-packager . mac --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds --ignore='
-eval 'tar -zcvf release-builds/mac.tar.gz release-builds/mac-darwin-x64'
-eval 'rm -rf release-builds/mac-darwin-x64'
+RELEASE_DIR="release-builds"
+APP_FOLDER="w3c-darwin-x64"
+
+eval "electron-packager . w3c --overwrite --platform=darwin --arch=x64 --prune=true --out=$RELEASE_DIR --ignore=assets"
+eval "cd $RELEASE_DIR/"
+eval "tar -zcvf mac.tar.gz $APP_FOLDER"
+eval "cd ../"
+eval "rm -rf $RELEASE_DIR/$APP_FOLDER"
+
+echo "macOS package is ready."
