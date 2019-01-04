@@ -23,6 +23,12 @@ import { listGroup } from './dom-constants';
 
             if (value === '') {
               dialog.parentElement.removeChild(dialog);
+              return;
+            }
+
+            if (!value.startsWith('http')) {
+              alert('Please add a protocol to your url');
+              return;
             }
 
             const page = new Page(value);

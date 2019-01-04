@@ -109,6 +109,9 @@ dialog {
 .result-item .info strong {
   text-transform: uppercase;
 }
+.result-item .location {
+  margin-bottom: 10px;
+}
 .result-item .extract {
   font-style: italic;
   font-size: 12px;
