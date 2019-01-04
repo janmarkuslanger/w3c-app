@@ -1,4 +1,4 @@
-# W3C App
+<p align="center"><img width="350" src="assets/logo.png" /></p>
 
 **A Desktop Application to validate your webpages with electron, photon and the w3c api**
 
