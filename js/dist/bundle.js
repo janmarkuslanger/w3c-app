@@ -134,6 +134,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
+/***/ "./js/src/external-links.js":
+/*!**********************************!*\
+  !*** ./js/src/external-links.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const { shell } = __webpack_require__(/*! electron */ \"electron\");\n\n(function(){\n\n  // get all links with target blank\n  const links = [].slice.call(document.querySelectorAll('a[target=\"_blank\"]'));\n\n  links.forEach((link) => {\n    link.addEventListener('click', (e) => {\n      // stop the event \n      e.preventDefault();\n      // get the href for the link\n      const href = link.getAttribute('href');\n      // open in external browser\n      shell.openExternal(href);\n    });\n  });\n}());\n\n\n//# sourceURL=webpack:///./js/src/external-links.js?");
+
+/***/ }),
+
 /***/ "./js/src/h.js":
 /*!*********************!*\
   !*** ./js/src/h.js ***!
@@ -165,7 +176,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! ./online */ \"./js/src/online.js\");\n__webpack_require__(/*! ./add-url */ \"./js/src/add-url.js\");\n__webpack_require__(/*! ./add-sitemap */ \"./js/src/add-sitemap.js\");\n__webpack_require__(/*! ./search-list */ \"./js/src/search-list.js\");\n\n// require('./test');\n\n\n//# sourceURL=webpack:///./js/src/index.js?");
+eval("__webpack_require__(/*! ./online */ \"./js/src/online.js\");\n__webpack_require__(/*! ./add-url */ \"./js/src/add-url.js\");\n__webpack_require__(/*! ./add-sitemap */ \"./js/src/add-sitemap.js\");\n__webpack_require__(/*! ./search-list */ \"./js/src/search-list.js\");\n__webpack_require__(/*! ./external-links */ \"./js/src/external-links.js\");\n\n\n//# sourceURL=webpack:///./js/src/index.js?");
 
 /***/ }),
 

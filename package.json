@@ -8,7 +8,7 @@
     "start": "electron .",
     "build": "webpack",
     "watch": "webpack --watch",
-    "build-mac": "sh scripts/build-mac.sh"
+    "build-mac": "sh scripts/build-mac"
   },
   "keywords": [
     "w3c",
