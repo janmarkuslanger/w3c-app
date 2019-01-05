@@ -14,4 +14,4 @@ Download it from the <a href="https://github.com/janmarkuslanger/w3c-app/release
 ## Todos
 -   [ ] Builder for Win / Linux
 -   [ ] Storing pages
--   [ ] Structur app / remove messy code
+-   [ ] Structure app / remove messy code
