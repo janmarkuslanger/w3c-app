@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 RELEASE_DIR="release-builds"
 APP_FOLDER="w3c-darwin-x64"
 
