@@ -30,7 +30,7 @@ export class Page {
       }
 
       if (message.type === 'info') {
-          errors += 1;
+          warnings += 1;
       }
     });
 

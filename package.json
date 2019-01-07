@@ -1,7 +1,7 @@
 {
   "name": "w3c-app",
   "productName": "A W3C Validator app.",
-  "version": "0.1.0-alpha.5",
+  "version": "0.1.0-alpha.6",
   "description": "A W3C Application.",
   "main": "index.js",
   "scripts": {
