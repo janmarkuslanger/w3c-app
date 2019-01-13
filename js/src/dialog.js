@@ -6,6 +6,12 @@ export class Dialog {
     this.content = content;
     this.cssClass = cssClass;
     this.template = this.renderTemplate();
+
+    window.addEventListener('keyup', (e) => {
+        if (e.key === 'Escape') {
+            this.destroy();
+        }
+    });
   }
 
   renderTemplate() {

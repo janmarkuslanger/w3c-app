@@ -81,6 +81,9 @@ dialog {
   background-color: rgb(245,245,245);
   border-radius: 4px;
 }
+.js--dialog button {
+    margin-right: 20px;
+}
 
 .js--result {
   padding: 20px;
