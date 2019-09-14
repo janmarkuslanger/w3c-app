@@ -27,5 +27,8 @@
     "smalltalk": "^3.4.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.8"
+  },
+  "dependencies": {
+    "ui-preloader": "^1.0.0"
   }
 }

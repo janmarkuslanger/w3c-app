@@ -1,4 +1,5 @@
 const axios = require('axios');
+import { init as UiPreloaderInit } from 'ui-preloader';
 
 export class Sitemap {
   constructor(url) {
@@ -6,8 +7,10 @@ export class Sitemap {
   }
 
   async extractUrls() {
+    const loader = UiPreloaderInit();
+    loader.render();
     const response = await axios.get(this.url);
-
+    loader.destroy()
     if (response.status !== 200) {
       return false;
     }
