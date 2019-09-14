@@ -1,4 +1,7 @@
-const Dialog = require('./app/js/components/dialog');
+import Dialog from './components/dialog';
 
-const dialog = new Dialog();
-console.log(dialog);
+new Dialog('sadfsdf', 'sdfsdfsdfsdf', {
+  onSubmit(val) {
+    console.log(val);
+  }
+});
