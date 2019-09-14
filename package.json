@@ -20,12 +20,12 @@
   "author": "Jan-Markus Langer",
   "license": "MIT",
   "devDependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "electron": "4.0.0",
-    "electron-packager": "^13.0.1",
-    "node-sass": "^4.11.0",
-    "smalltalk": "^3.2.2",
-    "webpack": "^4.28.3",
-    "webpack-cli": "^3.1.2"
+    "electron-packager": "^13.1.1",
+    "node-sass": "^4.12.0",
+    "smalltalk": "^3.4.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8"
   }
 }
