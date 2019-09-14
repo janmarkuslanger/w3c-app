@@ -6,8 +6,6 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build": "webpack",
-    "watch": "webpack --watch",
     "build-mac": "sh scripts/build-mac",
     "build-win": "sh scripts/build-win",
     "build-all": "npm run build-mac && npm run build-win"
