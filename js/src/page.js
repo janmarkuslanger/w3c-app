@@ -14,12 +14,6 @@ export class Page {
     addPage(this);
   }
 
-  async syncPageData() {
-    this.data = await axios.get(`https://validator.nu/?doc=${this.url}&out=json`);
-
-    return this.data;
-  }
-
   renderInfo(messages) {
     let warnings = 0;
     let errors = 0;

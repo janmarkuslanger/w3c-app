@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var crea
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/dialog */ \"./app/src/js/components/dialog.js\");\n\n\nnew _components_dialog__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('sadfsdf', 'sdfsdfsdfsdf', {\n  onSubmit(val) {\n    console.log(val);\n  }\n});\n\n\n//# sourceURL=webpack:///./app/src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/dialog */ \"./app/src/js/components/dialog.js\");\n\n\n// add event listener\ndocument.querySelector('.js--action-url')\n  .addEventListener('click', () => {\n    new _components_dialog__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('Enter a URL', 'Submit URL', {\n      onSubmit(val) {\n        console.log(val);\n      }\n    });\n  });\n\n\n//# sourceURL=webpack:///./app/src/js/index.js?");
 
 /***/ }),
 
