@@ -21,9 +21,12 @@
     "axios": "^0.18.1",
     "electron": "^6.0.9",
     "electron-packager": "^13.1.1",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.12.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8"
   },
   "dependencies": {
+    "create-element-lib": "^0.2.0",
     "ui-preloader": "^1.0.0"
   }
 }
