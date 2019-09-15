@@ -6,10 +6,10 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build-mac": "sh scripts/build-mac",
-    "build-win": "sh scripts/build-win",
-    "build-all": "npm run build-mac && npm run build-win",
-    "dev": "webpack --watch"
+    "dev": "webpack --watch",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [
     "w3c",
@@ -21,7 +21,7 @@
   "devDependencies": {
     "axios": "^0.18.1",
     "electron": "^6.0.9",
-    "electron-packager": "^13.1.1",
+    "electron-builder": "^21.2.0",
     "node-sass": "^4.12.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.8"
