@@ -19,6 +19,7 @@ class Page {
     this.url = url;
     this.data = null;
     this.messages = [];
+    this.listItemTemplate = null;
     this.renderListItem();
   }
 
@@ -29,9 +30,11 @@ class Page {
   }
 
   createListItem() {
-    return h('li', {class: 'list-group-item'}, [
+    this.listItemTemplate = h('li', {class: 'list-group-item'}, [
       h('div', {class: 'action-bar'}, [
-        h('div', {class: 'js--close'}, [
+        h('div', {class: 'js--close', click: () => {
+          this.destroy();
+        }}, [
           h('span', {class: 'icon icon-cancel'})
         ])
       ]),
@@ -43,6 +46,8 @@ class Page {
         ])
       ])
     ]);
+
+    return this.listItemTemplate;
   }
 
   async renderResults() {
@@ -91,6 +96,14 @@ class Page {
 
   renderHeaderItem() {
     document.querySelector('.js--result').appendChild(this.createHeaderItem());
+  }
+
+  destroy() {
+    clearResults();
+
+    if (this.listItemTemplate) {
+      this.listItemTemplate.parentElement.removeChild(this.listItemTemplate);
+    }
   }
 
 };
