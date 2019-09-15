@@ -28,9 +28,10 @@ class Dialog {
           ]),
           h('div', {class: 'form-group'}, [
             h('button', {class: 'btn btn-positive', click: (el) => {
-              const value = el.parentElement.previousElementSibling.firstChild.value;
+              const input = el.parentElement.previousElementSibling.firstChild;
+              const value = input.value;
               if (this.callbacks.onSubmit) {
-                this.callbacks.onSubmit(value);
+                this.callbacks.onSubmit(value, input);
               }
             }}, [this.buttonText]),
             h('button', {class: 'btn btn-negative', click: () => {

@@ -6,7 +6,7 @@ import Page from './components/page';
 document.querySelector('.js--action-url')
   .addEventListener('click', () => {
     new Dialog('Enter a URL', 'Submit URL', {
-      onSubmit(val) {
+      onSubmit(val, el) {
         const newPage = new Page(val);
       }
     });
