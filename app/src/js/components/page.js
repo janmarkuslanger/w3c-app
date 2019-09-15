@@ -5,19 +5,25 @@ const axios = require('axios');
 class Page {
   constructor(url) {
     if (!isUrl(url)) {
-      new Notification('No valid URL', {
+      const noUrl = new Notification('No valid URL', {
         body: 'Pleae enter a valid URL with http or https'
       });
+      noUrl.onshow = () => {
+        throw new Error('Cannot create Page');
+      }
       return;
     }
 
     this.url = url;
+    this.data = null;
     this.messages = [];
     this.renderListItem();
   }
 
   async fetchData() {
-    return await axios.get(`https://validator.nu/?doc=${this.url}&out=json`);
+    this.data = await axios.get(`https://validator.nu/?doc=${this.url}&out=json`);
+    this.messages = this.data.data.messages;
+    return this.data;
   }
 
   createListItem() {
@@ -28,11 +34,21 @@ class Page {
         ])
       ]),
       h('p', {class: 'padded'}, [
-        h('strong', {class: 'url'}, [
+        h('strong', {class: 'url', click: () => {
+          this.renderResults();
+        }}, [
           this.url
         ])
       ])
     ]);
+  }
+
+  async renderResults() {
+    await this.fetchData();
+    this.renderHeaderItem();
+    this.messages.forEach((message) => {
+      this.renderMessageItem(message);
+    });
   }
 
   renderListItem() {
@@ -42,7 +58,7 @@ class Page {
   createMessageItem(item) {
     return h('div', {class: `result-item ${item.type}`}, [
       h('p', {class: 'info'}, [
-        h('strong', null, [`${item.type}: `]),
+        h('strong', {}, [`${item.type}: `]),
         item.message
       ]),
       h('p', {class: 'location'}, [`Found in line ${item.lastLine} and column ${item.firstColumn}`]),
@@ -52,6 +68,16 @@ class Page {
 
   renderMessageItem(item) {
     document.querySelector('.js--result').appendChild(this.createMessageItem(item));
+  }
+
+  createHeaderItem() {
+    return h('div', {class: 'padded'}, [
+      h('h2', {class: 'title'}, [this.url])
+    ]);
+  }
+
+  renderHeaderItem() {
+    document.querySelector('.js--result').appendChild(this.createHeaderItem());
   }
 
 };
