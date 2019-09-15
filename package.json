@@ -8,8 +8,11 @@
     "start": "electron .",
     "dev": "webpack --watch",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
+    "dist": "rm -rf dist && electron-builder",
     "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "productName": "W3C"
   },
   "keywords": [
     "w3c",
