@@ -15,7 +15,7 @@
     "mac": {
       "icon": "assets/icons/icon.icns"
     },
-    "windows": {
+    "win": {
       "icon": "assets/icons/icon.ico"
     }
   },
