@@ -53,8 +53,3 @@ document.querySelector('.pane-sm .form-control').addEventListener('keyup', () =>
     items.forEach((item) => { item.style.display = 'block'; })
   }
 });
-
-// test
-new Notification('sdfsdf', {
-  icon: 'assets/logo.png'
-});
