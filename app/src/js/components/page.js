@@ -1,6 +1,7 @@
 import { h } from 'create-element-lib';
 import isUrl from '../utils/is-url';
 import clearResults from '../utils/clear-results';
+import { init as UiPreloaderInit } from 'ui-preloader';
 const axios = require('axios');
 
 class Page {
@@ -45,6 +46,8 @@ class Page {
   }
 
   async renderResults() {
+    const loader = UiPreloaderInit();
+    loader.render();
     try {
       await this.fetchData();
       this.renderHeaderItem();
@@ -56,6 +59,8 @@ class Page {
         body: 'An error occured while fetching the data via api'
       });
     }
+
+    loader.destroy();
   }
 
   renderListItem() {

@@ -28,10 +28,13 @@ class Sitemap {
 
   async render() {
     const loader = UiPreloaderInit();
-    await this.fetchUrls();
-    this.urls.forEach((url) => {
-      new Page(url);
-    });
+    loader.render();
+    try {
+      await this.fetchUrls();
+      this.urls.forEach((url) => {
+        new Page(url);
+      });
+    } catch (e) { } 
     loader.destroy();
   }
 }
