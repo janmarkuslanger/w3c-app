@@ -54,49 +54,5 @@ export class Page {
     });
   }
 
-  renderResultItem (item) {
-
-    return h('div', {class: `result-item ${item.type}`, click: function(){
-      clipboard.writeText(item.extract, 'selection');
-      new Notification('Copied to clipboard',{
-        body: 'The message was copied succesful'
-      });
-    }},[
-      h('p', {class: 'info'}, [
-        h('strong', null, [`${item.type}: `]),
-        item.message
-      ]),
-      h('p', {class: 'location'}, [`Found in line ${item.lastLine} and column ${item.firstColumn}`]),
-      h('p', {class: 'extract'}, [item.extract])
-    ]);
-  }
-
-  renderListItem () {
-    const that = this;
-
-    const template = h('li', {class: 'list-group-item'}, [
-      h('div', {class: 'action-bar'},[
-        h('div', {class: 'js--close', click: () => {
-          template.parentElement.removeChild(template);
-          removePage(that)
-
-          if (that === getActivePage()) {
-            clearChilds(container);
-          }
-
-        }}, [
-          h('span', {class: 'icon icon-cancel'})
-        ])
-      ]),
-      h('p', {class: 'padded'}, [
-        h('strong', {class: 'url', click: function(){
-          clearChilds(container);
-          that.renderData();
-        }}, [this.url])
-      ])
-    ]);
-
-    return template;
-  }
 
 }
