@@ -12,7 +12,8 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
-    "productName": "W3C"
+    "productName": "W3C",
+    "icon": "assets/icons/icon.icns"
   },
   "keywords": [
     "w3c",
