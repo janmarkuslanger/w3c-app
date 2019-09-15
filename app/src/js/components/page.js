@@ -1,8 +1,16 @@
 import { h } from 'create-element-lib';
+import isUrl from '../utils/is-url';
 const axios = require('axios');
 
 class Page {
   constructor(url) {
+    if (!isUrl(url)) {
+      new Notification('No valid URL', {
+        body: 'Pleae enter a valid URL with http or https'
+      });
+      return;
+    }
+
     this.url = url;
     this.messages = [];
     this.renderListItem();
