@@ -1,5 +1,6 @@
 import { h } from 'create-element-lib';
 import isUrl from '../utils/is-url';
+import clearResults from '../utils/clear-results';
 const axios = require('axios');
 
 class Page {
@@ -44,11 +45,17 @@ class Page {
   }
 
   async renderResults() {
-    await this.fetchData();
-    this.renderHeaderItem();
-    this.messages.forEach((message) => {
-      this.renderMessageItem(message);
-    });
+    try {
+      await this.fetchData();
+      this.renderHeaderItem();
+      this.messages.forEach((message) => {
+        this.renderMessageItem(message);
+      });
+    } catch (e) {
+      new Notification('Unexpected error', {
+        body: 'An error occured while fetching the data via api'
+      });
+    }
   }
 
   renderListItem() {
