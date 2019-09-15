@@ -12,7 +12,12 @@
   },
   "build": {
     "productName": "W3C",
-    "icon": "assets/icons/icon.icns"
+    "mac": {
+      "icon": "assets/icons/icon.icns"
+    },
+    "windows": {
+      "icon": "assets/icons/icon.ico"
+    }
   },
   "keywords": [
     "w3c",
