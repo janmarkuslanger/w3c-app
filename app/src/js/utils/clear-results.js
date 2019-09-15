@@ -3,7 +3,7 @@ const clearResults = () => {
   let firstChild = results.firstChild;
   while(firstChild) {
     firstChild.parentElement.removeChild(firstChild);
-    let firstChild = results.firstChild;
+    firstChild = results.firstChild;
   }
 };
 

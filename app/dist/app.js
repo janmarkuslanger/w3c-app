@@ -142,7 +142,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _com
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst clearResults = () => {\n  const results = document.querySelector('.js--result');\n  let firstChild = results.firstChild;\n  while(firstChild) {\n    firstChild.parentElement.removeChild(firstChild);\n    let firstChild = results.firstChild;\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (clearResults);\n\n\n//# sourceURL=webpack:///./app/src/js/utils/clear-results.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst clearResults = () => {\n  const results = document.querySelector('.js--result');\n  let firstChild = results.firstChild;\n  while(firstChild) {\n    firstChild.parentElement.removeChild(firstChild);\n    firstChild = results.firstChild;\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (clearResults);\n\n\n//# sourceURL=webpack:///./app/src/js/utils/clear-results.js?");
 
 /***/ }),
 
