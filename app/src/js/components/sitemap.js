@@ -17,6 +17,16 @@ class Sitemap {
   }
 
   async fetchUrls() {
+    const response = await axios.get(this.url);
+    this.urls = response.data.data
+      .match(/<loc>(.*?)<\/loc>/g)
+      .map((link) => link.replace(/<\/?loc>/g,''));
+  }
 
+  async render() {
+    await fetchUrls();
+    this.urls.forEach((url) => {
+      new Page(url);
+    });
   }
 }
