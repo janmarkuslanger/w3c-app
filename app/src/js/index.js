@@ -2,7 +2,6 @@ import Dialog from './components/dialog';
 import Page from './components/page';
 import Sitemap from './components/sitemap';
 
-
 // add event listener
 document.querySelector('.js--action-url')
   .addEventListener('click', () => {
@@ -38,6 +37,7 @@ document.querySelector('.js--action-sitemap')
     });
   });
 
+// search
 document.querySelector('.pane-sm .form-control').addEventListener('keyup', () => {
   const value = document.querySelector('.pane-sm .form-control').value;
   const items = [].slice.call(document.querySelectorAll('.list-group-item'));
@@ -52,4 +52,9 @@ document.querySelector('.pane-sm .form-control').addEventListener('keyup', () =>
   } else {
     items.forEach((item) => { item.style.display = 'block'; })
   }
+});
+
+// test
+new Notification('sdfsdf', {
+  icon: 'assets/logo.png'
 });
