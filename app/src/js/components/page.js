@@ -46,6 +46,7 @@ class Page {
   }
 
   async renderResults() {
+    clearResults();
     const loader = UiPreloaderInit();
     loader.render();
     try {
