@@ -16,7 +16,8 @@
       "icon": "assets/icons/icon.icns"
     },
     "win": {
-      "icon": "assets/icons/icon.ico"
+      "icon": "assets/icons/icon.ico",
+      "target": [ "portable" ]
     }
   },
   "keywords": [
