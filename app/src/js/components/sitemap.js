@@ -4,7 +4,7 @@ const axios = require('axios');
 import { init as UiPreloaderInit } from 'ui-preloader';
 
 class Sitemap {
-  constructor(url) {
+  constructor(url, callbacks = {}) {
     if (!isUrl(url)) {
       const noUrl = new Notification('No valid URL', {
         body: 'Pleae enter a valid URL with http or https'
@@ -16,6 +16,7 @@ class Sitemap {
     }
 
     this.url = url;
+    this.callbacks = callbacks;
     this.urls = [];
   }
 
@@ -32,9 +33,12 @@ class Sitemap {
     try {
       await this.fetchUrls();
       this.urls.forEach((url) => {
-        new Page(url);
+        const page = new Page(url);
+        if (this.callbacks.onAddPage) {
+          this.callbacks.onAddPage(page);
+        }
       });
-    } catch (e) { } 
+    } catch (e) { }
     loader.destroy();
   }
 }

@@ -5,10 +5,10 @@ import { init as UiPreloaderInit } from 'ui-preloader';
 const axios = require('axios');
 
 class Page {
-  constructor(url) {
+  constructor(url, callbacks = {}) {
     if (!isUrl(url)) {
       const noUrl = new Notification('No valid URL', {
-        body: 'Pleae enter a valid URL with http or https'
+        body: 'Please enter a valid URL with http or https'
       });
       noUrl.onshow = () => {
         throw new Error('Cannot create Page');
@@ -17,10 +17,11 @@ class Page {
     }
 
     this.url = url;
+    this.callbacks = callbacks;
     this.data = null;
     this.messages = [];
     this.listItemTemplate = null;
-    this.renderListItem();
+    addPage(this);
   }
 
   async fetchData() {
@@ -98,12 +99,17 @@ class Page {
     document.querySelector('.js--result').appendChild(this.createHeaderItem());
   }
 
-  destroy() {
+  remove() {
     clearResults();
 
     if (this.listItemTemplate) {
       this.listItemTemplate.parentElement.removeChild(this.listItemTemplate);
     }
+
+    if (this.callbacks.onRemove) {
+      this.callbacks.onRemove(this);
+    }
+
   }
 
 };
