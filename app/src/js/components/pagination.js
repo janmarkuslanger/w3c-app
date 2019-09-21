@@ -55,6 +55,10 @@ class Pagination {
   }
 
   add(item) {
+    if (this.items.length < this.maxItems) {
+      item.renderListItem();
+    }
+    
     this.items.push(item);
     this.update();
   }

@@ -1,6 +1,6 @@
 import { h } from 'create-element-lib';
 import isUrl from '../utils/is-url';
-import clearResults from '../utils/clear-results';
+import removeElements from '../utils/remove-elements';
 import { init as UiPreloaderInit } from 'ui-preloader';
 const axios = require('axios');
 
@@ -51,7 +51,7 @@ class Page {
   }
 
   async renderResults() {
-    clearResults();
+    removeElements(document.querySelector('.js--result'));
     const loader = UiPreloaderInit();
     loader.render();
     try {

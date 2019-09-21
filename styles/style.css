@@ -8,10 +8,7 @@ dialog {
 }
 
 .pane-sm.sidebar {
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  -o-transition: all .5s;
-  transition: all .5s;
+  position: relative;
 }
 .pane-sm.sidebar:hover {
   max-width: 50%;
@@ -46,11 +43,13 @@ dialog {
   list-style: none;
   width: 100%;
   font-size: 0;
-  padding: 10px;
+  padding: 10px 20px;
   margin: 0;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  background-color: rgb(255,255,255);
+  border-right: 40px solid white;
 }
 .pagination .item {
   font-size: 14px;
