@@ -6,7 +6,7 @@ class Pagination {
     this.template = null;
     this.items = items;
     this.index = 0;
-    this.maxItems = 2;
+    this.maxItems = 200;
     this.callbacks = callbacks;
     this.render();
     this.update();
