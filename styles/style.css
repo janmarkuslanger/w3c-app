@@ -38,6 +38,35 @@ dialog {
   left: 10px;
 }
 
+.pagination {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  list-style: none;
+  width: 100%;
+  font-size: 0;
+  padding: 10px;
+  margin: 0;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.pagination .item {
+  font-size: 14px;
+  display: inline-block;
+  text-decoration: underline;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.pagination .item:last-child {
+  margin-right: 0;
+}
+.pagination .item.is--active {
+  text-decoration: none;
+  cursor: auto;
+}
+
 .js--dialog {
   position: fixed;
   top: 0;

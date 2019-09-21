@@ -21,7 +21,6 @@ class Page {
     this.data = null;
     this.messages = [];
     this.listItemTemplate = null;
-    addPage(this);
   }
 
   async fetchData() {
@@ -34,7 +33,7 @@ class Page {
     this.listItemTemplate = h('li', {class: 'list-group-item'}, [
       h('div', {class: 'action-bar'}, [
         h('div', {class: 'js--close', click: () => {
-          this.destroy();
+          this.remove();
         }}, [
           h('span', {class: 'icon icon-cancel'})
         ])

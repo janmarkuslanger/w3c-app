@@ -23,8 +23,14 @@ document.querySelector('.js--action-url')
             }
           });
           pagination.add(newPage);
+
+          if (pagination.items.length <= pagination.maxItems) {
+            newPage.renderListItem();
+          }
+
           dialog.destroy();
         } catch (e) {
+          console.log(e);
           // there was an error while adding a page
           input.value = ''; // reset input field
         }
