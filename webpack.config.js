@@ -2,10 +2,10 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './js/src/index.js',
+  entry: './app/src/js/index',
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'js/dist')
+    filename: 'app.js',
+    path: path.resolve(__dirname, 'app/dist')
   },
   target: "electron-renderer"
 };

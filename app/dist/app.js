@@ -81,160 +81,92 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./js/src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./app/src/js/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./js/src/add-sitemap.js":
-/*!*******************************!*\
-  !*** ./js/src/add-sitemap.js ***!
-  \*******************************/
+/***/ "./app/src/js/components/dialog.js":
+/*!*****************************************!*\
+  !*** ./app/src/js/components/dialog.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var create_element_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! create-element-lib */ \"./node_modules/create-element-lib/src/index.js\");\n\n\nclass Dialog {\n  constructor(title, buttonText, callbacks = {}) {\n\n    if (!title || !buttonText) {\n      console.error('Cannot create Dialog');\n      return;\n    }\n\n    this.title = title;\n    this.buttonText = buttonText;\n    this.callbacks = callbacks;\n    this.template = null;\n    this.render();\n  }\n\n  createTemplate() {\n    this.template = Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'js--dialog'}, [\n      Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'shadow'}),\n      Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'inner'}, [\n        Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'close', click: () => {\n          this.destroy();\n        }}, [ Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('span', {class: 'icon icon-cancel'}) ]),\n        Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form padded-more'}, [\n          Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n            Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('input', {type: 'text', class: 'form-control', placeholder: this.title})\n          ]),\n          Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n            Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-positive', click: (el) => {\n              const input = el.parentElement.previousElementSibling.firstChild;\n              const value = input.value;\n              if (this.callbacks.onSubmit) {\n                this.callbacks.onSubmit(value, input);\n              }\n            }}, [this.buttonText]),\n            Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-negative', click: () => {\n              this.destroy();\n            }}, ['Cancel'])\n          ])\n        ])\n      ])\n    ]);\n\n    return this.template;\n  }\n\n  render() {\n    if (this.template) {\n      return;\n    }\n\n    const template = this.createTemplate();\n    document.querySelector('body').appendChild(template);\n  }\n\n  destroy() {\n    if (!this.template) {\n      return;\n    }\n\n    this.template.parentElement.removeChild(this.template);\n  }\n\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Dialog);\n\n\n//# sourceURL=webpack:///./app/src/js/components/dialog.js?");
+
+/***/ }),
+
+/***/ "./app/src/js/components/page.js":
+/*!***************************************!*\
+  !*** ./app/src/js/components/page.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var create_element_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! create-element-lib */ \"./node_modules/create-element-lib/src/index.js\");\n/* harmony import */ var _utils_is_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/is-url */ \"./app/src/js/utils/is-url.js\");\n/* harmony import */ var _utils_remove_elements__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/remove-elements */ \"./app/src/js/utils/remove-elements.js\");\n/* harmony import */ var ui_preloader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ui-preloader */ \"./node_modules/ui-preloader/js/dist/ui-preloader.js\");\n/* harmony import */ var ui_preloader__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ui_preloader__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nclass Page {\n  constructor(url, callbacks = {}) {\n    if (!Object(_utils_is_url__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(url)) {\n      const noUrl = new Notification('No valid URL', {\n        body: 'Please enter a valid URL with http or https'\n      });\n      noUrl.onshow = () => {\n        throw new Error('Cannot create Page');\n      }\n      return;\n    }\n\n    this.url = url;\n    this.callbacks = callbacks;\n    this.data = null;\n    this.messages = [];\n    this.listItemTemplate = null;\n  }\n\n  async fetchData() {\n    this.data = await axios.get(`https://validator.nu/?doc=${this.url}&out=json`);\n    this.messages = this.data.data.messages;\n    return this.data;\n  }\n\n  createListItem() {\n    this.listItemTemplate = Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('li', {class: 'list-group-item'}, [\n      Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'action-bar'}, [\n        Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'js--close', click: () => {\n          this.remove();\n        }}, [\n          Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('span', {class: 'icon icon-cancel'})\n        ])\n      ]),\n      Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'padded'}, [\n        Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('strong', {class: 'url', click: () => {\n          this.renderResults();\n        }}, [\n          this.url\n        ])\n      ])\n    ]);\n\n    return this.listItemTemplate;\n  }\n\n  async renderResults() {\n    Object(_utils_remove_elements__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(document.querySelector('.js--result'));\n    const loader = Object(ui_preloader__WEBPACK_IMPORTED_MODULE_3__[\"init\"])();\n    loader.render();\n    try {\n      await this.fetchData();\n      this.renderHeaderItem();\n      this.messages.forEach((message) => {\n        this.renderMessageItem(message);\n      });\n    } catch (e) {\n      new Notification('Unexpected error', {\n        body: 'An error occured while fetching the data via api'\n      });\n    }\n\n    loader.destroy();\n  }\n\n  renderListItem() {\n    document.querySelector('.list-group').appendChild(this.createListItem());\n  }\n\n  createMessageItem(item) {\n    return Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: `result-item ${item.type}`}, [\n      Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'info'}, [\n        Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('strong', {}, [`${item.type}: `]),\n        item.message\n      ]),\n      Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'location'}, [`Found in line ${item.lastLine} and column ${item.firstColumn}`]),\n      Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'extract'}, [item.extract])\n    ]);\n  }\n\n  renderMessageItem(item) {\n    document.querySelector('.js--result').appendChild(this.createMessageItem(item));\n  }\n\n  createHeaderItem() {\n    return Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'padded'}, [\n      Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('h2', {class: 'title'}, [this.url])\n    ]);\n  }\n\n  renderHeaderItem() {\n    document.querySelector('.js--result').appendChild(this.createHeaderItem());\n  }\n\n  remove() {\n    clearResults();\n\n    if (this.listItemTemplate) {\n      this.listItemTemplate.parentElement.removeChild(this.listItemTemplate);\n    }\n\n    if (this.callbacks.onRemove) {\n      this.callbacks.onRemove(this);\n    }\n\n  }\n\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Page);\n\n\n//# sourceURL=webpack:///./app/src/js/components/page.js?");
+
+/***/ }),
+
+/***/ "./app/src/js/components/pagination.js":
+/*!*********************************************!*\
+  !*** ./app/src/js/components/pagination.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var create_element_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! create-element-lib */ \"./node_modules/create-element-lib/src/index.js\");\n/* harmony import */ var _utils_remove_elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/remove-elements */ \"./app/src/js/utils/remove-elements.js\");\n\n\n\nclass Pagination {\n  constructor(items, callbacks) {\n    this.template = null;\n    this.items = items;\n    this.index = 0;\n    this.maxItems = 200;\n    this.callbacks = callbacks;\n    this.render();\n    this.update();\n  }\n\n  goTo(index) {\n    const activeItems = [];\n    let point = this.maxItems * index;\n    const itemCount = (this.items.length - point) > this.maxItems\n      ? this.maxItems\n      : (this.items.length - point);\n\n    for (let i = 0; i < itemCount; i++) {\n      activeItems.push(this.items[point + i]);\n    }\n\n    [].slice.call(document.querySelectorAll('.list-group-item'))\n      .forEach((item) => {\n        item.parentElement.removeChild(item);\n      });\n\n    activeItems.forEach((item) => {\n      item.renderListItem();\n    });\n\n    this.index = index;\n    this.update()\n  }\n\n  update() {\n    const item = this.template;\n\n    Object(_utils_remove_elements__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(this.template);\n\n    let pages = this.items.length / this.maxItems;\n\n    if (pages <= 1) {\n      return;\n    }\n\n    pages = pages % 1 === 0 ? pages : parseInt(pages + 1);\n\n    for (let i = 0; i < pages; i++) {\n      this.template.appendChild(this.createItem(i));\n    }\n  }\n\n  add(item) {\n    if (this.items.length < this.maxItems) {\n      item.renderListItem();\n    }\n    \n    this.items.push(item);\n    this.update();\n  }\n\n\n  remove(item) {\n    this.items.splice(this.items.indexOf(item), 1);\n    this.update();\n  }\n\n  destroy() {\n    this.template.parentElement.removeChild(this.template);\n  }\n\n  render() {\n    this.template = Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('ul', {class: 'pagination'});\n    document.querySelector('.pane-sm.sidebar').appendChild(this.template);\n  }\n\n  createItem(index) {\n    return Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('li', {class: `item ${this.index === index ? 'is--active' : ''}`, click: () => {\n      this.goTo(index);\n    }}, [(index + 1).toString()]);\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Pagination);\n\n\n//# sourceURL=webpack:///./app/src/js/components/pagination.js?");
+
+/***/ }),
+
+/***/ "./app/src/js/components/sitemap.js":
+/*!******************************************!*\
+  !*** ./app/src/js/components/sitemap.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./page */ \"./app/src/js/components/page.js\");\n/* harmony import */ var _utils_is_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/is-url */ \"./app/src/js/utils/is-url.js\");\n/* harmony import */ var ui_preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ui-preloader */ \"./node_modules/ui-preloader/js/dist/ui-preloader.js\");\n/* harmony import */ var ui_preloader__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(ui_preloader__WEBPACK_IMPORTED_MODULE_2__);\n\n\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\n\nclass Sitemap {\n  constructor(url, callbacks = {}) {\n    if (!Object(_utils_is_url__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(url)) {\n      const noUrl = new Notification('No valid URL', {\n        body: 'Pleae enter a valid URL with http or https'\n      });\n      noUrl.onshow = () => {\n        throw new Error('Cannot create Sitemap');\n      }\n      return;\n    }\n\n    this.url = url;\n    this.callbacks = callbacks;\n    this.urls = [];\n  }\n\n  async fetchUrls() {\n    const response = await axios.get(this.url);\n    this.urls = response.data\n      .match(/<loc>(.*?)<\\/loc>/g)\n      .map((link) => link.replace(/<\\/?loc>/g,''));\n  }\n\n  async render() {\n    const loader = Object(ui_preloader__WEBPACK_IMPORTED_MODULE_2__[\"init\"])();\n    loader.render();\n    try {\n      await this.fetchUrls();\n      this.urls.forEach((url) => {\n        const page = new _page__WEBPACK_IMPORTED_MODULE_0__[\"default\"](url);\n        if (this.callbacks.onAddPage) {\n          this.callbacks.onAddPage(page);\n        }\n      });\n    } catch (e) { }\n    loader.destroy();\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Sitemap);\n\n\n//# sourceURL=webpack:///./app/src/js/components/sitemap.js?");
+
+/***/ }),
+
+/***/ "./app/src/js/index.js":
+/*!*****************************!*\
+  !*** ./app/src/js/index.js ***!
+  \*****************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n/* harmony import */ var _sitemap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sitemap */ \"./js/src/sitemap.js\");\n/* harmony import */ var _page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./page */ \"./js/src/page.js\");\n/* harmony import */ var _dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dialog */ \"./js/src/dialog.js\");\n/* harmony import */ var _dom_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dom-constants */ \"./js/src/dom-constants.js\");\n\n\n\n\n\n\n\n(function(){\n  /**\n   * icon\n   * @type {HTML Element}\n   */\n  const icon = document.querySelector('header .js--action-sitemap');\n\n  icon.addEventListener('click', () => {\n    const inputField = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('input', {type: 'text', class: 'form-control', placeholder: 'Enter a Sitemap'});\n    const content = [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form padded-more'},[\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          inputField,\n        ]),\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-positive', click: async function(){\n            const value = inputField.value;\n\n            if (value === '') {\n              dialog.parentElement.removeChild(dialog);\n            }\n\n            const _sitemap = new _sitemap__WEBPACK_IMPORTED_MODULE_1__[\"Sitemap\"](value);\n            const urls = await _sitemap.extractUrls();\n\n            urls.forEach((url) => {\n              const page = new _page__WEBPACK_IMPORTED_MODULE_2__[\"Page\"](url);\n              const item = page.renderListItem();\n              _dom_constants__WEBPACK_IMPORTED_MODULE_4__[\"listGroup\"].appendChild(item);\n            });\n\n            urlDialog.destroy();\n          }}, ['Add URL']),\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-negative', click: function(){\n            urlDialog.destroy();\n          }}, ['Cancel'])\n        ])\n      ])\n    ];\n\n    const urlDialog = new _dialog__WEBPACK_IMPORTED_MODULE_3__[\"Dialog\"](content);\n    urlDialog.render(document.body);\n  });\n\n}());\n\n\n//# sourceURL=webpack:///./js/src/add-sitemap.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/dialog */ \"./app/src/js/components/dialog.js\");\n/* harmony import */ var _components_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/page */ \"./app/src/js/components/page.js\");\n/* harmony import */ var _components_sitemap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/sitemap */ \"./app/src/js/components/sitemap.js\");\n/* harmony import */ var _components_pagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/pagination */ \"./app/src/js/components/pagination.js\");\n\n\n\n\n\n// pagination\nconst pagination = new _components_pagination__WEBPACK_IMPORTED_MODULE_3__[\"default\"]([], {\n  onIndexChange(index) {\n    console.log(index);\n  }\n});\n\n// add event listener\ndocument.querySelector('.js--action-url')\n  .addEventListener('click', () => {\n    const dialog = new _components_dialog__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('Enter a URL', 'Submit URL', {\n      onSubmit(val,  input) {\n        let newPage;\n        try {\n          newPage = new _components_page__WEBPACK_IMPORTED_MODULE_1__[\"default\"](val, {\n            onRemove(_this) {\n              pagination.remove(_this);\n            }\n          });\n          pagination.add(newPage);\n\n          if (pagination.items.length <= pagination.maxItems) {\n            newPage.renderListItem();\n          }\n\n          dialog.destroy();\n        } catch (e) {\n          console.log(e);\n          // there was an error while adding a page\n          input.value = ''; // reset input field\n        }\n      }\n    });\n  });\n\ndocument.querySelector('.js--action-sitemap')\n  .addEventListener('click', () => {\n    const dialog = new _components_dialog__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('Enter an url of a sitemap', 'Submit Sitemap', {\n      async onSubmit(val,  input) {\n        let newSitemap;\n        try {\n          newSitemap = new _components_sitemap__WEBPACK_IMPORTED_MODULE_2__[\"default\"](val, {\n            onAddPage(page) {\n              console.log(page);\n              pagination.add(page);\n            }\n          });\n          await newSitemap.render();\n          dialog.destroy();\n        } catch (e) {\n          console.log(e);\n          // there was an error while adding a page\n          input.value = ''; // reset input field\n        }\n      }\n    });\n  });\n\n// search\ndocument.querySelector('.pane-sm .form-control').addEventListener('keyup', () => {\n  const value = document.querySelector('.pane-sm .form-control').value;\n  const items = [].slice.call(document.querySelectorAll('.list-group-item'));\n\n  if (value !== '') {\n    items.forEach((item) => {\n      const itemValue = item.querySelector('strong').textContent;\n      item.style.display = itemValue.includes(value)\n        ? 'block'\n        : 'none';\n    });\n  } else {\n    items.forEach((item) => { item.style.display = 'block'; })\n  }\n});\n\n\n//# sourceURL=webpack:///./app/src/js/index.js?");
 
 /***/ }),
 
-/***/ "./js/src/add-url.js":
-/*!***************************!*\
-  !*** ./js/src/add-url.js ***!
-  \***************************/
-/*! no exports provided */
+/***/ "./app/src/js/utils/is-url.js":
+/*!************************************!*\
+  !*** ./app/src/js/utils/is-url.js ***!
+  \************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n/* harmony import */ var _dialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dialog */ \"./js/src/dialog.js\");\n/* harmony import */ var _page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./page */ \"./js/src/page.js\");\n/* harmony import */ var _dom_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dom-constants */ \"./js/src/dom-constants.js\");\n\n\n\n\n\n(function(){\n  /**\n   * icon\n   * @type {HTML Element}\n   */\n  const icon = document.querySelector('header .js--action-url');\n\n  icon.addEventListener('click', () => {\n    const inputField = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('input', {type: 'text', class: 'form-control', placeholder: 'Enter a URL'});\n    const content = [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form padded-more'},[\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          inputField,\n        ]),\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'form-group'}, [\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-positive', click: function(){\n            const value = inputField.value;\n\n            if (value === '') {\n              dialog.parentElement.removeChild(dialog);\n              return;\n            }\n\n            if (!value.startsWith('http')) {\n              alert('Please add a protocol to your url');\n              return;\n            }\n\n            const page = new _page__WEBPACK_IMPORTED_MODULE_2__[\"Page\"](value);\n            const item = page.renderListItem();\n            _dom_constants__WEBPACK_IMPORTED_MODULE_3__[\"listGroup\"].appendChild(item);\n\n            urlDialog.destroy();\n          }}, ['Add URL']),\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('button', {class: 'btn btn-negative', click: function(){\n            urlDialog.destroy();\n          }}, ['Cancel'])\n        ])\n      ])\n    ];\n\n    const urlDialog = new _dialog__WEBPACK_IMPORTED_MODULE_1__[\"Dialog\"](content);\n    urlDialog.render(document.body);\n  });\n\n}());\n\n\n//# sourceURL=webpack:///./js/src/add-url.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * validate url\n * @param {String}\n * @return {Boolean}\n */\nconst isUrl = s => s.startsWith('http://') || s.startsWith('https://');\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (isUrl);\n\n\n//# sourceURL=webpack:///./app/src/js/utils/is-url.js?");
 
 /***/ }),
 
-/***/ "./js/src/dialog.js":
-/*!**************************!*\
-  !*** ./js/src/dialog.js ***!
-  \**************************/
-/*! exports provided: Dialog */
+/***/ "./app/src/js/utils/remove-elements.js":
+/*!*********************************************!*\
+  !*** ./app/src/js/utils/remove-elements.js ***!
+  \*********************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Dialog\", function() { return Dialog; });\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n\n\nclass Dialog {\n\n  constructor(content, cssClass) {\n    this.content = content;\n    this.cssClass = cssClass;\n    this.template = this.renderTemplate();\n\n    window.addEventListener('keyup', (e) => {\n        if (e.key === 'Escape') {\n            this.destroy();\n        }\n    });\n  }\n\n  renderTemplate() {\n    const that = this;\n\n    this.port = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: `content ${this.cssClass}`});\n\n    return Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'js--dialog'}, [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'shadow'}),\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'inner'}, [\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'close', click: function(){\n          that.destroy();\n        }}, [Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('span', {class: 'icon icon-cancel'})]),\n        this.port\n      ])\n    ]);\n  }\n\n  destroy() {\n    this.template.parentElement.removeChild(this.template);\n  }\n\n  render(root) {\n    const that = this;\n\n    if (Array.isArray(this.content)) {\n      this.content.forEach(function(item){\n        that.port.appendChild(item)\n      });\n    } else {\n      this.port.appendChild(this.content);\n    }\n\n    root.appendChild(this.template);\n  }\n\n};\n\n\n//# sourceURL=webpack:///./js/src/dialog.js?");
-
-/***/ }),
-
-/***/ "./js/src/dom-constants.js":
-/*!*********************************!*\
-  !*** ./js/src/dom-constants.js ***!
-  \*********************************/
-/*! exports provided: listGroup */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"listGroup\", function() { return listGroup; });\n/**\n * list group\n * @type {HTML Element}\n */\nconst listGroup = document.querySelector('.pane-sm.sidebar .list-group');\n\n\n//# sourceURL=webpack:///./js/src/dom-constants.js?");
-
-/***/ }),
-
-/***/ "./js/src/external-links.js":
-/*!**********************************!*\
-  !*** ./js/src/external-links.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("const { shell } = __webpack_require__(/*! electron */ \"electron\");\n\n(function(){\n\n  // get all links with target blank\n  const links = [].slice.call(document.querySelectorAll('a[target=\"_blank\"]'));\n\n  links.forEach((link) => {\n    link.addEventListener('click', (e) => {\n      // stop the event \n      e.preventDefault();\n      // get the href for the link\n      const href = link.getAttribute('href');\n      // open in external browser\n      shell.openExternal(href);\n    });\n  });\n}());\n\n\n//# sourceURL=webpack:///./js/src/external-links.js?");
-
-/***/ }),
-
-/***/ "./js/src/h.js":
-/*!*********************!*\
-  !*** ./js/src/h.js ***!
-  \*********************/
-/*! exports provided: h */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"h\", function() { return h; });\n/**\n * creates an html element\n * @param {String} tag\n * @param {Object | null} props\n * @param {Array} childs\n */\nconst h = (tag = 'div', props = null, childs = []) => {\n  // create an element\n  const element = document.createElement(tag);\n\n  for (let key in props) {\n    const value = props[key];\n    if (typeof value === 'function') {\n      element.addEventListener(key, function(e){\n        value(element, e);\n      });\n    } else {\n      element.setAttribute(key, value);\n    }\n  }\n\n  if (childs.length > 0) {\n\n    for (let i = 0; i < childs.length; i++) {\n\n      if (childs[i] === null) {\n        continue;\n      }\n\n      typeof childs[i] === 'string'\n        ? element.appendChild(document.createTextNode(childs[i]))\n        : element.appendChild(childs[i]);\n    }\n\n  }\n\n  return element;\n};\n\n\n//# sourceURL=webpack:///./js/src/h.js?");
-
-/***/ }),
-
-/***/ "./js/src/helper.js":
-/*!**************************!*\
-  !*** ./js/src/helper.js ***!
-  \**************************/
-/*! exports provided: clearChilds */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"clearChilds\", function() { return clearChilds; });\nconst clearChilds = (container) => {\n  while (container.firstChild) {\n    container.removeChild(container.firstChild);\n  }\n};\n\n\n//# sourceURL=webpack:///./js/src/helper.js?");
-
-/***/ }),
-
-/***/ "./js/src/index.js":
-/*!*************************!*\
-  !*** ./js/src/index.js ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("__webpack_require__(/*! ./online */ \"./js/src/online.js\");\n__webpack_require__(/*! ./add-url */ \"./js/src/add-url.js\");\n__webpack_require__(/*! ./add-sitemap */ \"./js/src/add-sitemap.js\");\n__webpack_require__(/*! ./search-list */ \"./js/src/search-list.js\");\n__webpack_require__(/*! ./external-links */ \"./js/src/external-links.js\");\n\n\n//# sourceURL=webpack:///./js/src/index.js?");
-
-/***/ }),
-
-/***/ "./js/src/online.js":
-/*!**************************!*\
-  !*** ./js/src/online.js ***!
-  \**************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("(function(){\n  /**\n   * header html element\n   * @type {HTML element}\n   */\n  const header = document.querySelector('header');\n\n  /**\n   * online class\n   * @type {String}\n   */\n  const onlineClass = 'btn-positive';\n\n  /**\n   * online text\n   * @type {String}\n   */\n  const onlineText = 'Online';\n\n  /**\n   * offline class\n   * @type {String}\n   */\n  const offlineClass = 'btn-negative';\n\n  /**\n   * offline text\n   * @type {String}\n   */\n  const offlineText = 'Offline';\n\n\n  /**\n   * online button\n   * @type {HTML Element}\n   */\n  const button = header.querySelector('.js--online');\n\n  window.addEventListener('online', () => {\n    button.textContent = onlineText;\n    button.classList.add(onlineClass);\n    button.classList.remove(offlineClass);\n  });\n\n  window.addEventListener('offline', () => {\n    button.textContent = offlineText;\n    button.classList.add(offlineClass);\n    button.classList.remove(onlineClass);\n  });\n\n}());\n\n\n//# sourceURL=webpack:///./js/src/online.js?");
-
-/***/ }),
-
-/***/ "./js/src/page.js":
-/*!************************!*\
-  !*** ./js/src/page.js ***!
-  \************************/
-/*! exports provided: Page */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Page\", function() { return Page; });\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./js/src/h.js\");\n/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper */ \"./js/src/helper.js\");\n/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./state */ \"./js/src/state.js\");\n\n\n\nconst { clipboard } = __webpack_require__(/*! electron */ \"electron\");\n\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nconst container = document.querySelector('.js--result');\n\nclass Page {\n\n  constructor(url) {\n    this.url = url;\n    Object(_state__WEBPACK_IMPORTED_MODULE_2__[\"addPage\"])(this);\n  }\n\n  async syncPageData() {\n    this.data = await axios.get(`https://validator.nu/?doc=${this.url}&out=json`);\n\n    return this.data;\n  }\n\n  renderInfo(messages) {\n    let warnings = 0;\n    let errors = 0;\n\n    messages.forEach((message) => {\n      if (message.type === 'error') {\n          errors += 1;\n      }\n\n      if (message.type === 'info') {\n          warnings += 1;\n      }\n    });\n\n    return Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'result-item'},[\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'info'}, [ `${errors.toString()} Errors | ${warnings.toString()} Warnings` ])\n    ]);\n  }\n\n  async renderData() {\n    Object(_state__WEBPACK_IMPORTED_MODULE_2__[\"setActive\"])(this);\n    await this.syncPageData();\n    const that = this;\n    const messages = this.data.data.messages;\n\n    if (messages.length > 0) {\n      container.appendChild(this.renderInfo(messages));\n      messages.forEach((message) => {\n        const item = that.renderResultItem(message);\n        container.appendChild(item);\n      });\n    } else {\n      container.appendChild(Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('h1', {class: 'no-error'}, ['There are no errors. :)']))\n    }\n\n    new Notification('W3C-Check ready.', {\n      body: `The W3C Check on page ${this.url} is ready.`\n    });\n  }\n\n  renderResultItem (item) {\n\n    return Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: `result-item ${item.type}`, click: function(){\n      clipboard.writeText(item.extract, 'selection');\n      new Notification('Copied to clipboard',{\n        body: 'The message was copied succesful'\n      });\n    }},[\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'info'}, [\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('strong', null, [`${item.type}: `]),\n        item.message\n      ]),\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'location'}, [`Found in line ${item.lastLine} and column ${item.firstColumn}`]),\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'extract'}, [item.extract])\n    ]);\n  }\n\n  renderListItem () {\n    const that = this;\n\n    const template = Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('li', {class: 'list-group-item'}, [\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'action-bar'},[\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('div', {class: 'js--close', click: () => {\n          template.parentElement.removeChild(template);\n          Object(_state__WEBPACK_IMPORTED_MODULE_2__[\"removePage\"])(that)\n\n          if (that === Object(_state__WEBPACK_IMPORTED_MODULE_2__[\"getActive\"])()) {\n            Object(_helper__WEBPACK_IMPORTED_MODULE_1__[\"clearChilds\"])(container);\n          }\n\n        }}, [\n          Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('span', {class: 'icon icon-cancel'})\n        ])\n      ]),\n      Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('p', {class: 'padded'}, [\n        Object(_h__WEBPACK_IMPORTED_MODULE_0__[\"h\"])('strong', {class: 'url', click: function(){\n          Object(_helper__WEBPACK_IMPORTED_MODULE_1__[\"clearChilds\"])(container);\n          that.renderData();\n        }}, [this.url])\n      ])\n    ]);\n\n    return template;\n  }\n\n}\n\n\n//# sourceURL=webpack:///./js/src/page.js?");
-
-/***/ }),
-
-/***/ "./js/src/search-list.js":
-/*!*******************************!*\
-  !*** ./js/src/search-list.js ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("(function(){\n\n  /**\n   * input element\n   * @type {HTML Element}\n   */\n  const input = document.querySelector('.pane-sm .form-control');\n\n  input.addEventListener('keyup', () => {\n\n    const value = input.value;\n\n    const items = [].slice.call(document.querySelectorAll('.list-group-item'));\n\n    if (value !== '') {\n      items.forEach((item) => {\n        const itemValue = item.querySelector('strong').textContent;\n        if (itemValue.includes(value)) {\n          item.style.display = 'block';\n        } else {\n          item.style.display = 'none';\n        }\n      });\n    } else {\n      items.forEach((item) => { item.style.display = 'block'; })\n    }\n\n  });\n\n}());\n\n\n//# sourceURL=webpack:///./js/src/search-list.js?");
-
-/***/ }),
-
-/***/ "./js/src/sitemap.js":
-/*!***************************!*\
-  !*** ./js/src/sitemap.js ***!
-  \***************************/
-/*! exports provided: Sitemap */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Sitemap\", function() { return Sitemap; });\n/* harmony import */ var ui_preloader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ui-preloader */ \"./node_modules/ui-preloader/js/dist/ui-preloader.js\");\n/* harmony import */ var ui_preloader__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(ui_preloader__WEBPACK_IMPORTED_MODULE_0__);\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\n\nclass Sitemap {\n  constructor(url) {\n    this.url = url;\n  }\n\n  async extractUrls() {\n    const loader = Object(ui_preloader__WEBPACK_IMPORTED_MODULE_0__[\"init\"])();\n    loader.render();\n    const response = await axios.get(this.url);\n    loader.destroy()\n    if (response.status !== 200) {\n      return false;\n    }\n\n    const data = response.data;\n\n    const urls = data.match(/<loc>(.*?)<\\/loc>/g).map(function(link){\n      return link.replace(/<\\/?loc>/g,'');\n    });\n\n    return urls;\n  }\n\n}\n\n\n//# sourceURL=webpack:///./js/src/sitemap.js?");
-
-/***/ }),
-
-/***/ "./js/src/state.js":
-/*!*************************!*\
-  !*** ./js/src/state.js ***!
-  \*************************/
-/*! exports provided: getPages, getActive, addPage, removePage, setActive */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getPages\", function() { return getPages; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getActive\", function() { return getActive; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"addPage\", function() { return addPage; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"removePage\", function() { return removePage; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"setActive\", function() { return setActive; });\nconst state = {\n  active: null,\n  pages: []\n};\n\nconst getPages = () => state.pages;\n\nconst getActive = () => state.active;\n\nconst addPage = (page) => {\n  state.pages.push(page);\n};\n\nconst removePage = (page) => {\n  const index = state.pages.indexOf(page);\n\n  if (index < 0) {\n    return;\n  }\n\n  state.pages.splice(index, 1);\n};\n\nconst setActive = (page) => {\n  state.active = page;\n};\n\n\n//# sourceURL=webpack:///./js/src/state.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst removeElements = el => {\n  if (!el || !el.firstChild) {\n    return;\n  }\n\n  let firstChild;\n\n  while(el.firstChild) {\n    firstChild = el.firstChild;\n    firstChild.parentElement.removeChild(firstChild);\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (removeElements);\n\n\n//# sourceURL=webpack:///./app/src/js/utils/remove-elements.js?");
 
 /***/ }),
 
@@ -525,6 +457,42 @@ eval("\n\nvar bind = __webpack_require__(/*! ./helpers/bind */ \"./node_modules/
 
 /***/ }),
 
+/***/ "./node_modules/create-element-lib/src/h.js":
+/*!**************************************************!*\
+  !*** ./node_modules/create-element-lib/src/h.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _is_string__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./is-string */ \"./node_modules/create-element-lib/src/is-string.js\");\n\n\n/**\n * main function to create elements\n * @param {String} tag\n * @param {Object|Array} args\n */\nconst h = (tag, properties = {}, childs = []) => {\n  if (!Object(_is_string__WEBPACK_IMPORTED_MODULE_0__[\"isString\"])(tag)) {\n    throw new Error('No valid tag given'); // tag must be a string\n  }\n\n  // create the html node\n  const element = document.createElement(tag);\n\n  // get they object keys\n  const propKeys = Object.keys(properties);\n\n  propKeys.forEach((prop) => {\n    const value = properties[prop];\n\n    typeof value === 'function'\n      ? element.addEventListener('click', (e) => {\n          value(element, e); // call the given function with the element and event as parameters\n        })\n      : element.setAttribute(prop, value);\n  });\n\n  childs.forEach((child) => {\n    Object(_is_string__WEBPACK_IMPORTED_MODULE_0__[\"isString\"])(child)\n      ? element.appendChild(document.createTextNode(child))\n      : (child ? element.appendChild(child) : null);\n  });\n\n  // return the composed element\n  return element;\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (h);\n\n\n//# sourceURL=webpack:///./node_modules/create-element-lib/src/h.js?");
+
+/***/ }),
+
+/***/ "./node_modules/create-element-lib/src/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/create-element-lib/src/index.js ***!
+  \******************************************************/
+/*! exports provided: h, version */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"version\", function() { return version; });\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \"./node_modules/create-element-lib/src/h.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"h\", function() { return _h__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n\n\n/**\n * version\n * @type {String}\n */\nconst version = '0.1.1';\n\n\n\n\n//# sourceURL=webpack:///./node_modules/create-element-lib/src/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/create-element-lib/src/is-string.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/create-element-lib/src/is-string.js ***!
+  \**********************************************************/
+/*! exports provided: isString */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"isString\", function() { return isString; });\n/**\n * checks if a given arg is a string\n * @type {String} s\n * @return {Boolean}\n */\nconst isString = s => typeof s === 'string';\n\n\n//# sourceURL=webpack:///./node_modules/create-element-lib/src/is-string.js?");
+
+/***/ }),
+
 /***/ "./node_modules/is-buffer/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/is-buffer/index.js ***!
@@ -544,17 +512,6 @@ eval("/*!\n * Determine if an object is a Buffer\n *\n * @author   Feross Aboukh
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("(function webpackUniversalModuleDefinition(root, factory) {\n\tif(true)\n\t\tmodule.exports = factory();\n\telse {}\n})(window, function() {\nreturn /******/ (function(modules) { // webpackBootstrap\n/******/ \t// The module cache\n/******/ \tvar installedModules = {};\n/******/\n/******/ \t// The require function\n/******/ \tfunction __webpack_require__(moduleId) {\n/******/\n/******/ \t\t// Check if module is in cache\n/******/ \t\tif(installedModules[moduleId]) {\n/******/ \t\t\treturn installedModules[moduleId].exports;\n/******/ \t\t}\n/******/ \t\t// Create a new module (and put it into the cache)\n/******/ \t\tvar module = installedModules[moduleId] = {\n/******/ \t\t\ti: moduleId,\n/******/ \t\t\tl: false,\n/******/ \t\t\texports: {}\n/******/ \t\t};\n/******/\n/******/ \t\t// Execute the module function\n/******/ \t\tmodules[moduleId].call(module.exports, module, module.exports, __webpack_require__);\n/******/\n/******/ \t\t// Flag the module as loaded\n/******/ \t\tmodule.l = true;\n/******/\n/******/ \t\t// Return the exports of the module\n/******/ \t\treturn module.exports;\n/******/ \t}\n/******/\n/******/\n/******/ \t// expose the modules object (__webpack_modules__)\n/******/ \t__webpack_require__.m = modules;\n/******/\n/******/ \t// expose the module cache\n/******/ \t__webpack_require__.c = installedModules;\n/******/\n/******/ \t// define getter function for harmony exports\n/******/ \t__webpack_require__.d = function(exports, name, getter) {\n/******/ \t\tif(!__webpack_require__.o(exports, name)) {\n/******/ \t\t\tObject.defineProperty(exports, name, { enumerable: true, get: getter });\n/******/ \t\t}\n/******/ \t};\n/******/\n/******/ \t// define __esModule on exports\n/******/ \t__webpack_require__.r = function(exports) {\n/******/ \t\tif(typeof Symbol !== 'undefined' && Symbol.toStringTag) {\n/******/ \t\t\tObject.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });\n/******/ \t\t}\n/******/ \t\tObject.defineProperty(exports, '__esModule', { value: true });\n/******/ \t};\n/******/\n/******/ \t// create a fake namespace object\n/******/ \t// mode & 1: value is a module id, require it\n/******/ \t// mode & 2: merge all properties of value into the ns\n/******/ \t// mode & 4: return value when already ns object\n/******/ \t// mode & 8|1: behave like require\n/******/ \t__webpack_require__.t = function(value, mode) {\n/******/ \t\tif(mode & 1) value = __webpack_require__(value);\n/******/ \t\tif(mode & 8) return value;\n/******/ \t\tif((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;\n/******/ \t\tvar ns = Object.create(null);\n/******/ \t\t__webpack_require__.r(ns);\n/******/ \t\tObject.defineProperty(ns, 'default', { enumerable: true, value: value });\n/******/ \t\tif(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));\n/******/ \t\treturn ns;\n/******/ \t};\n/******/\n/******/ \t// getDefaultExport function for compatibility with non-harmony modules\n/******/ \t__webpack_require__.n = function(module) {\n/******/ \t\tvar getter = module && module.__esModule ?\n/******/ \t\t\tfunction getDefault() { return module['default']; } :\n/******/ \t\t\tfunction getModuleExports() { return module; };\n/******/ \t\t__webpack_require__.d(getter, 'a', getter);\n/******/ \t\treturn getter;\n/******/ \t};\n/******/\n/******/ \t// Object.prototype.hasOwnProperty.call\n/******/ \t__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };\n/******/\n/******/ \t// __webpack_public_path__\n/******/ \t__webpack_require__.p = \"\";\n/******/\n/******/\n/******/ \t// Load entry module and return exports\n/******/ \treturn __webpack_require__(__webpack_require__.s = \"./js/src/index.js\");\n/******/ })\n/************************************************************************/\n/******/ ({\n\n/***/ \"./js/src/component.js\":\n/*!*****************************!*\\\n  !*** ./js/src/component.js ***!\n  \\*****************************/\n/*! exports provided: default */\n/***/ (function(module, __webpack_exports__, __webpack_require__) {\n\n\"use strict\";\neval(\"__webpack_require__.r(__webpack_exports__);\\n/* harmony import */ var create_element_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! create-element-lib */ \\\"./node_modules/create-element-lib/src/index.js\\\");\\n/* harmony import */ var _util_div__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util/div */ \\\"./js/src/util/div.js\\\");\\nfunction _classCallCheck(instance, Constructor) {\\n  if (!(instance instanceof Constructor)) {\\n    throw new TypeError(\\\"Cannot call a class as a function\\\");\\n  }\\n}\\n\\nfunction _defineProperties(target, props) {\\n  for (var i = 0; i < props.length; i++) {\\n    var descriptor = props[i];\\n    descriptor.enumerable = descriptor.enumerable || false;\\n    descriptor.configurable = true;\\n    if (\\\"value\\\" in descriptor) descriptor.writable = true;\\n    Object.defineProperty(target, descriptor.key, descriptor);\\n  }\\n}\\n\\nfunction _createClass(Constructor, protoProps, staticProps) {\\n  if (protoProps) _defineProperties(Constructor.prototype, protoProps);\\n  if (staticProps) _defineProperties(Constructor, staticProps);\\n  return Constructor;\\n}\\n\\n\\n\\n\\nvar UiPreloader =\\n/*#__PURE__*/\\nfunction () {\\n  /**\\n  * constructor\\n  * @param {Node} root\\n  */\\n  function UiPreloader(root) {\\n    _classCallCheck(this, UiPreloader);\\n\\n    this.root = root;\\n    this.template = null; // store complete html container\\n  }\\n  /**\\n   * creates the html template\\n   * @return {HTMLElement}\\n   */\\n\\n\\n  _createClass(UiPreloader, [{\\n    key: \\\"createTemplate\\\",\\n    value: function createTemplate() {\\n      this.template = Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\\\"h\\\"])('div', {\\n        \\\"class\\\": 'preloader-js-container'\\n      }, [Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\\\"h\\\"])('div', {\\n        \\\"class\\\": 'shadow'\\n      }), Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\\\"h\\\"])('div', {\\n        \\\"class\\\": 'preloader-js'\\n      }, [Object(_util_div__WEBPACK_IMPORTED_MODULE_1__[\\\"default\\\"])(), Object(_util_div__WEBPACK_IMPORTED_MODULE_1__[\\\"default\\\"])(), Object(_util_div__WEBPACK_IMPORTED_MODULE_1__[\\\"default\\\"])(), Object(_util_div__WEBPACK_IMPORTED_MODULE_1__[\\\"default\\\"])()])]);\\n      return this.template;\\n    }\\n    /**\\n     * renders the html template in the dom\\n     */\\n\\n  }, {\\n    key: \\\"render\\\",\\n    value: function render() {\\n      if (this.template) {\\n        return;\\n      }\\n\\n      var template = this.createTemplate();\\n      this.root.appendChild(template);\\n    }\\n    /**\\n     * deletes the html template from the dom\\n     */\\n\\n  }, {\\n    key: \\\"destroy\\\",\\n    value: function destroy() {\\n      if (!this.template) {\\n        return;\\n      }\\n\\n      this.root.removeChild(this.template);\\n      this.template = null;\\n    }\\n  }]);\\n\\n  return UiPreloader;\\n}();\\n\\n/* harmony default export */ __webpack_exports__[\\\"default\\\"] = (UiPreloader);\\n\\n//# sourceURL=webpack://UiPreloader/./js/src/component.js?\");\n\n/***/ }),\n\n/***/ \"./js/src/index.js\":\n/*!*************************!*\\\n  !*** ./js/src/index.js ***!\n  \\*************************/\n/*! exports provided: init */\n/***/ (function(module, __webpack_exports__, __webpack_require__) {\n\n\"use strict\";\neval(\"__webpack_require__.r(__webpack_exports__);\\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \\\"init\\\", function() { return init; });\\n/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component */ \\\"./js/src/component.js\\\");\\n\\n/**\\n * init component\\n * @param {Node} root\\n * @return {Object}\\n */\\n\\nvar init = function init() {\\n  var root = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.querySelector('body');\\n  return new _component__WEBPACK_IMPORTED_MODULE_0__[\\\"default\\\"](root);\\n};\\n\\n\\n\\n//# sourceURL=webpack://UiPreloader/./js/src/index.js?\");\n\n/***/ }),\n\n/***/ \"./js/src/util/div.js\":\n/*!****************************!*\\\n  !*** ./js/src/util/div.js ***!\n  \\****************************/\n/*! exports provided: default */\n/***/ (function(module, __webpack_exports__, __webpack_require__) {\n\n\"use strict\";\neval(\"__webpack_require__.r(__webpack_exports__);\\n/* harmony import */ var create_element_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! create-element-lib */ \\\"./node_modules/create-element-lib/src/index.js\\\");\\n\\n/**\\n * utility function to return empty div\\n * @return {Node}\\n */\\n\\nvar div = function div() {\\n  return Object(create_element_lib__WEBPACK_IMPORTED_MODULE_0__[\\\"h\\\"])('div');\\n};\\n\\n/* harmony default export */ __webpack_exports__[\\\"default\\\"] = (div);\\n\\n//# sourceURL=webpack://UiPreloader/./js/src/util/div.js?\");\n\n/***/ }),\n\n/***/ \"./node_modules/create-element-lib/src/h.js\":\n/*!**************************************************!*\\\n  !*** ./node_modules/create-element-lib/src/h.js ***!\n  \\**************************************************/\n/*! exports provided: default */\n/***/ (function(module, __webpack_exports__, __webpack_require__) {\n\n\"use strict\";\neval(\"__webpack_require__.r(__webpack_exports__);\\n/* harmony import */ var _is_string__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./is-string */ \\\"./node_modules/create-element-lib/src/is-string.js\\\");\\n\\n\\n/**\\n * main function to create elements\\n * @param {String} tag\\n * @param {Object|Array} args\\n */\\nconst h = (tag, properties = {}, childs = []) => {\\n  if (!Object(_is_string__WEBPACK_IMPORTED_MODULE_0__[\\\"isString\\\"])(tag)) {\\n    throw new Error('No valid tag given'); // tag must be a string\\n  }\\n\\n  // create the html node\\n  const element = document.createElement(tag);\\n\\n  // get they object keys\\n  const propKeys = Object.keys(properties);\\n\\n  propKeys.forEach((prop) => {\\n    const value = properties[prop];\\n\\n    typeof value === 'function'\\n      ? element.addEventListener('click', (e) => {\\n          value(element, e); // call the given function with the element and event as parameters\\n        })\\n      : element.setAttribute(prop, value);\\n  });\\n\\n  childs.forEach((child) => {\\n    Object(_is_string__WEBPACK_IMPORTED_MODULE_0__[\\\"isString\\\"])(child)\\n      ? element.appendChild(document.createTextNode(child))\\n      : element.appendChild(child);\\n  });\\n\\n  // return the composed element\\n  return element;\\n};\\n\\n/* harmony default export */ __webpack_exports__[\\\"default\\\"] = (h);\\n\\n\\n//# sourceURL=webpack://UiPreloader/./node_modules/create-element-lib/src/h.js?\");\n\n/***/ }),\n\n/***/ \"./node_modules/create-element-lib/src/index.js\":\n/*!******************************************************!*\\\n  !*** ./node_modules/create-element-lib/src/index.js ***!\n  \\******************************************************/\n/*! exports provided: h, version */\n/***/ (function(module, __webpack_exports__, __webpack_require__) {\n\n\"use strict\";\neval(\"__webpack_require__.r(__webpack_exports__);\\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \\\"version\\\", function() { return version; });\\n/* harmony import */ var _h__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./h */ \\\"./node_modules/create-element-lib/src/h.js\\\");\\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \\\"h\\\", function() { return _h__WEBPACK_IMPORTED_MODULE_0__[\\\"default\\\"]; });\\n\\n\\n\\n/**\\n * version\\n * @type {String}\\n */\\nconst version = '0.1.1';\\n\\n\\n\\n\\n//# sourceURL=webpack://UiPreloader/./node_modules/create-element-lib/src/index.js?\");\n\n/***/ }),\n\n/***/ \"./node_modules/create-element-lib/src/is-string.js\":\n/*!**********************************************************!*\\\n  !*** ./node_modules/create-element-lib/src/is-string.js ***!\n  \\**********************************************************/\n/*! exports provided: isString */\n/***/ (function(module, __webpack_exports__, __webpack_require__) {\n\n\"use strict\";\neval(\"__webpack_require__.r(__webpack_exports__);\\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \\\"isString\\\", function() { return isString; });\\n/**\\n * checks if a given arg is a string\\n * @type {String} s\\n * @return {Boolean}\\n */\\nconst isString = s => typeof s === 'string';\\n\\n\\n//# sourceURL=webpack://UiPreloader/./node_modules/create-element-lib/src/is-string.js?\");\n\n/***/ })\n\n/******/ });\n});\n\n//# sourceURL=webpack:///./node_modules/ui-preloader/js/dist/ui-preloader.js?");
-
-/***/ }),
-
-/***/ "electron":
-/*!***************************!*\
-  !*** external "electron" ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("module.exports = require(\"electron\");\n\n//# sourceURL=webpack:///external_%22electron%22?");
 
 /***/ })
 

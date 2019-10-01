@@ -1,16 +1,24 @@
 {
   "name": "w3c-app",
-  "productName": "A W3C Validator app.",
-  "version": "0.1.0-beta",
+  "version": "1.0.0",
   "description": "A W3C Application.",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "build-mac": "sh scripts/build-mac",
-    "build-win": "sh scripts/build-win",
-    "build-all": "npm run build-mac && npm run build-win"
+    "dev": "webpack --watch",
+    "pack": "electron-builder --dir",
+    "dist": "rm -rf dist && electron-builder -mw",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "productName": "W3C",
+    "mac": {
+      "icon": "assets/icons/icon.icns"
+    },
+    "win": {
+      "icon": "assets/icons/icon.ico",
+      "target": [ "portable" ]
+    }
   },
   "keywords": [
     "w3c",
@@ -21,14 +29,14 @@
   "license": "MIT",
   "devDependencies": {
     "axios": "^0.18.1",
-    "electron": "4.0.0",
-    "electron-packager": "^13.1.1",
+    "electron": "^6.0.9",
+    "electron-builder": "^21.2.0",
     "node-sass": "^4.12.0",
-    "smalltalk": "^3.4.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.8"
   },
   "dependencies": {
+    "create-element-lib": "^0.2.0",
     "ui-preloader": "^1.0.0"
   }
 }

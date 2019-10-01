@@ -50,7 +50,13 @@ const devMenu = {
 const template = [applicationMenu,editMenu,devMenu];
 
 function createWindow () {
-  win = new BrowserWindow({ width: 1200, height: 1000 });
+  win = new BrowserWindow({
+    width: 1200,
+    height: 1000 ,
+    webPreferences: {
+        nodeIntegration: true
+    }
+  });
 
   win.loadFile('index.html');
 
@@ -68,6 +74,7 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+
 
 app.on('activate', () => {
   if (win === null) {

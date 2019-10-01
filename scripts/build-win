@@ -1,10 +1,5 @@
-#!/usr/bin/env node
-
-RELEASE_DIR="release-builds"
-APP_FOLDER="w3c-win32-ia32"
-
-eval "electron-packager . w3c --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName="W3C""
-eval "cd $RELEASE_DIR/"
-eval "tar -zcvf win.tar.gz $APP_FOLDER"
-eval "cd ../"
-eval "rm -rf $RELEASE_DIR/$APP_FOLDER"
+electron-packager . w3c --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName="W3C"
+cd release-builds/
+tar -zcvf win.tar.gz w3c-win32-ia32
+cd ../
+rm -rf release-builds/w3c-win32-ia32
