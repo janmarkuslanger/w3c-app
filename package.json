@@ -33,7 +33,7 @@
     "axios": "^0.18.1",
     "electron": "^6.1.7",
     "electron-builder": "^21.2.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "webpack": "^4.41.4",
     "webpack-cli": "^3.3.10"
   },
