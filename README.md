@@ -21,7 +21,7 @@ For questions and support will free to create an issue or write an email to
 janmarkuslanger10121994@gmail.com
 
 ## Issues
-If you found a bug then please create an issue. It will help a lot.
+If you found a bug, then please create an issue. It will help a lot.
 
 ## Contribution
 Pull requests are always welcome. I am always happy to see others working on
