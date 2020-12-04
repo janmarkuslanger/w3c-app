@@ -1,26 +1,8 @@
 {
   "name": "w3c-app",
   "version": "1.0.0",
-  "description": "A W3C Application.",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "dev": "webpack --watch",
-    "pack": "electron-builder --dir",
-    "dist": "rm -rf dist && electron-builder -mw",
-    "postinstall": "electron-builder install-app-deps"
-  },
-  "build": {
-    "productName": "W3C",
-    "mac": {
-      "icon": "assets/icons/icon.icns"
-    },
-    "win": {
-      "icon": "assets/icons/icon.ico",
-      "target": [
-        "portable"
-      ]
-    }
   },
   "keywords": [
     "w3c",
@@ -28,17 +10,5 @@
     "w3c-api"
   ],
   "author": "Jan-Markus Langer",
-  "license": "MIT",
-  "devDependencies": {
-    "axios": "^0.18.1",
-    "electron": "^7.2.4",
-    "electron-builder": "^21.2.0",
-    "node-sass": "^4.13.1",
-    "webpack": "^4.41.4",
-    "webpack-cli": "^3.3.10"
-  },
-  "dependencies": {
-    "create-element-lib": "^0.2.0",
-    "ui-preloader": "^1.0.0"
-  }
+  "license": "MIT"
 }

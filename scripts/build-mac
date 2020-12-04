@@ -1,6 +1,0 @@
-electron-packager . w3c --overwrite --platform=darwin --arch=x64 --prune=true --icon=assets/icons/icon.icns --out=release-builds --ignore=assets
-cd release-builds/
-tar -zcvf mac.tar.gz w3c-darwin-x64
-cd ../
-rm -rf release-builds/w3c-darwin-x64
-echo "macOS package is ready."

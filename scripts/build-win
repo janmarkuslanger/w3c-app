@@ -1,5 +1,0 @@
-electron-packager . w3c --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName="W3C"
-cd release-builds/
-tar -zcvf win.tar.gz w3c-win32-ia32
-cd ../
-rm -rf release-builds/w3c-win32-ia32
