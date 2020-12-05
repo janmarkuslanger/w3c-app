@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap');
+
+:root {
+    --white: #FFFFFF;
+    --black: #2e282a;
+    --red: #f24236;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Header Search */
+.top-search {
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    background-color: var(--black);
+}
+.top-search__input {
+    flex: 2;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    border: 0;
+}
+.top-search__button {
+    flex: 1;
+    height: 50px;
+    border: 0;
+    font-weight: 600;
+    background-color: var(--red);
+    color: var(--black);
+    font-size: 18px;
+}
+
+
+/* Spinner element */
+.spinner-element {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;background-color: var(--black);
+    opacity: .8;
+}
+.spinner-element__spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.spinner-element__spinner {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--white);
+    border-radius: 50%;
+    animation: spinner 2s;
+    animation-fill-mode: backwards;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+
+@keyframes spinner {
+    0 {
+        transform: translateX(-30px);
+    }
+    100% {
+        transform: translateX(30px);
+    }
+}
