@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "electron ."
   },
   "keywords": [
     "w3c",
@@ -10,5 +11,8 @@
     "w3c-api"
   ],
   "author": "Jan-Markus Langer",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^11.0.3"
+  }
 }
